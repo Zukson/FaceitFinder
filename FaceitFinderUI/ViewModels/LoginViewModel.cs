@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FaceitFinderUI.ViewModels
 {
-    class LoginViewModel:Screen
+  public    class LoginViewModel:Screen
     {
     }
 }

@@ -5,11 +5,13 @@ using System.Text;
 
 namespace FaceitFinderUI.ViewModels
 {
- public   class ShellViewModel :Conductor<object>
+   class ShellViewModel :Conductor<object>
     {
-        public ShellViewModel()
+        private LoginViewModel _login;
+    public   ShellViewModel(LoginViewModel login)
         {
-            ActivateItem(IoC.Get<LoginViewModel>());
+            _login = login;
+            ActivateItem(_login) ;
         }
     }
 }
