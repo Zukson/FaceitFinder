@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Helpers;
 using FaceitFinderUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FaceitFinderUI
 {
@@ -16,6 +18,10 @@ namespace FaceitFinderUI
         public Bootstrapper()
         {
             Initialize();
+            ConventionManager.AddElementConvention<PasswordBox>(
+           PasswordBoxHelper.BoundPasswordProperty,
+           "Password",
+           "PasswordChanged");
         }
         protected override void Configure()
         {
