@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceitFinderUI", "FaceitFinderUI\FaceitFinderUI.csproj", "{84DC6FE6-8A4E-4EA8-A43A-05EB54B2B14E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceitFinderUI", "FaceitFinderUI\FaceitFinderUI.csproj", "{84DC6FE6-8A4E-4EA8-A43A-05EB54B2B14E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FaceitFinderDb", "FaceitFinderDb", "{C979CA4E-CB10-4DD6-BB78-23F543F9ED2E}"
+	ProjectSection(SolutionItems) = preProject
+		FaceitFinderDb\FaceitFinderdb.db = FaceitFinderDb\FaceitFinderdb.db
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
