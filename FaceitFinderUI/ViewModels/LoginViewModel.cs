@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using SqlLibrary.DataAccess;
 using SqlLibrary.Models;
@@ -11,9 +12,12 @@ namespace FaceitFinderUI.ViewModels
   public    class LoginViewModel:Screen
     {
         private readonly ISqlHelper _sqlHelper;
-        public LoginViewModel(ISqlHelper sqlHelper)
+        private LogOnEvent _logOnEvent;
+        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent )
         {
             _sqlHelper = sqlHelper;
+            _logOnEvent = logOnEvent;
+         
 
         }
 
@@ -79,20 +83,21 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
-            try
-            {
-                await _sqlHelper.SaveUser(new UserSqlModel
-                {
-                    Email = "Kornio@wp.pl",
-                    Nickname = "KornioxPompa",
-                    Password = "Kornio3002"
-                });
-            }
-            catch (Exception ex)
-            {
+            _logOnEvent.LogIn();
+            //try
+            //{
+            //    await _sqlHelper.SaveUser(new UserSqlModel
+            //    {
+            //        Email = "Kornio@wp.pl",
+            //        Nickname = "KornioxPompa",
+            //        Password = "Kornio3002"
+            //    });
+            //}
+            //catch (Exception ex)
+            //{
 
-                throw;
-            }
+            //    throw;
+            //}
             //TODO logika logowania
         }
 

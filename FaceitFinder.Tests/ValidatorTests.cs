@@ -1,9 +1,11 @@
 ﻿using FaceitFinderUI.Helpers;
+using Xunit;
+
+using FaceitFinderUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using Xunit;
 
 namespace FaceitFinder.Tests
 {

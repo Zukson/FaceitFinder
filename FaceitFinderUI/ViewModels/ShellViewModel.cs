@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,11 +10,19 @@ namespace FaceitFinderUI.ViewModels
     {
         private RegisterViewModel _register;
         private LoginViewModel _login;
-    public   ShellViewModel(LoginViewModel login,RegisterViewModel register)
+        private LogOnEvent _logOnEvent;
+    public   ShellViewModel(LoginViewModel login,RegisterViewModel register,LogOnEvent logOnEvent)
         {
             _register = register;
             _login = login;
-            ActivateItem(_register) ;
+            ActivateItem(_login) ;
+            _logOnEvent = logOnEvent;
+            _logOnEvent.LogInEvent += Login;
+        }
+
+        public void Login()
+        {
+            ActivateItem(_register);
         }
     }
 }

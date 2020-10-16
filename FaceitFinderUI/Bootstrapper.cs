@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using FaceitFinderUI.ViewModels;
 using SqlLibrary.DataAccess;
@@ -28,6 +29,8 @@ namespace FaceitFinderUI
         {
             base.Configure();
             _container.Instance(_container);
+            _container.Singleton<LogOnEvent>();
+            
 
             _container.Singleton<IWindowManager, WindowManager>().
                 Singleton<IEventAggregator, EventAggregator>().
