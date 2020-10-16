@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace SqlLibrary.DataAccess
@@ -30,11 +31,11 @@ namespace SqlLibrary.DataAccess
 
         }
 
-        public async Task SaveData<T>(string query, T data, dynamic parameters )
+        public async Task SaveData<T>(string query,   T parameters )
         {
             using (IDbConnection sql = new SQLiteConnection(GetConnectionString("DB")))
             {
-                await sql.ExecuteAsync(query, data);
+                await sql.ExecuteAsync(query, parameters);
 
 
             }

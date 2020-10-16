@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FaceitFinderUI.Helpers
 {
-    class SqlHelper
+    public class SqlHelper : ISqlHelper
     {
         private ISqlData _sqlData;
         public SqlHelper(ISqlData sqlData)
@@ -17,14 +17,14 @@ namespace FaceitFinderUI.Helpers
         }
 
 
-       async Task<List<UserSqlModel>> GetPlayers ()
+        public async Task<List<UserSqlModel>> GetPlayers()
         {
             var output = await _sqlData.GetAllUsers<UserSqlModel>(_sqlData.GetConnectionString("DB"));
 
             return output.ToList();
 
         }
-        async Task<UserSqlModel> GetPlayerById(int id)
+        public async Task<UserSqlModel> GetPlayerById(int id)
         {
             var output = await _sqlData.GetAllUsers<UserSqlModel>(_sqlData.GetConnectionString("DB"));
 
@@ -32,13 +32,23 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        async Task SaveUser(UserSqlModel user)  
-        { 
+        public async Task SaveUser(UserSqlModel user)
+        {
             dynamic parameters = new
             {
-                Id=user.Id
-            }
-            _sqlData.SaveData<UserSqlModel>(" ", user);
+                Id = user.Id,
+                Nickname = user.Nickname,
+                Email = user.Email,
+                Password = user.Password
+
+
+            };
+            string sql = @"Insert into Users (Nickname,Email,Password) values (@Nickname,@Email,@Password)";
+            await _sqlData.SaveData<dynamic>(sql, user);
         }
     }
 }
+//public int Id { get; set; }
+//public string Nickname { get; set; }
+//public string Email { get; set; }
+//public string Password { get; set; }

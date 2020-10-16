@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Helpers;
 using SqlLibrary.DataAccess;
+using SqlLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +10,10 @@ namespace FaceitFinderUI.ViewModels
 {
   public    class LoginViewModel:Screen
     {
-
-        public LoginViewModel()
+        private readonly ISqlHelper _sqlHelper;
+        public LoginViewModel(ISqlHelper sqlHelper)
         {
+            _sqlHelper = sqlHelper;
 
         }
 
@@ -38,8 +41,7 @@ namespace FaceitFinderUI.ViewModels
             set { 
                 
                 _password = value;
-                SqlData sql = new SqlData();
-                string x = sql.GetConnectionString("DB");
+             
 
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogin);
@@ -77,6 +79,20 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
+            try
+            {
+                await _sqlHelper.SaveUser(new UserSqlModel
+                {
+                    Email = "Kornio@wp.pl",
+                    Nickname = "KornioxPompa",
+                    Password = "Kornio3002"
+                });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
             //TODO logika logowania
         }
 

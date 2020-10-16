@@ -13,7 +13,7 @@ namespace FaceitFinderUI.ViewModels
         {
             _register = register;
             _login = login;
-            ActivateItem(_login) ;
+            ActivateItem(_register) ;
         }
     }
 }

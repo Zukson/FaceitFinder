@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using FaceitFinderUI.Helpers;
 using FaceitFinderUI.ViewModels;
+using SqlLibrary.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace FaceitFinderUI
             _container.Instance(_container);
 
             _container.Singleton<IWindowManager, WindowManager>().
-                Singleton<IEventAggregator, EventAggregator>();
+                Singleton<IEventAggregator, EventAggregator>().
+                Singleton<ISqlHelper,SqlHelper>().Singleton<ISqlData,SqlData>();
          
             GetType().Assembly.GetTypes().Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))
