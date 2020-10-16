@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiLibrary\ApiLibrary.csproj" />
+    <ProjectReference Include="..\SqlLibrary\SqlLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Database\FaceitFinderDb.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

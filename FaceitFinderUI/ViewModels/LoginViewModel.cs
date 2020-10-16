@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SqlLibrary.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,7 +38,8 @@ namespace FaceitFinderUI.ViewModels
             set { 
                 
                 _password = value;
-
+                SqlData sql = new SqlData();
+                string x = sql.GetConnectionString("DB");
 
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogin);
