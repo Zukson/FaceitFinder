@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using ApiLibrary.Api;
+using Caliburn.Micro;
 using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using SqlLibrary.DataAccess;
@@ -14,11 +15,13 @@ namespace FaceitFinderUI.ViewModels
         private readonly ISqlHelper _sqlHelper;
         private LogOnEvent _logOnEvent;
         private readonly IValidateHelper _validate;
-        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent,IValidateHelper validate )
+        IFaceitApi _api;
+        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent,IValidateHelper validate,IFaceitApi api )
         {
             _sqlHelper = sqlHelper;
             _logOnEvent = logOnEvent;
             _validate=validate;
+            _api = api;
          
 
         }
@@ -108,7 +111,7 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
-            
+         var w=   await _api.GetPlayerIdByName("zukson");
             _logOnEvent.LogIn();
 
             //try

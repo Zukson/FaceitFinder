@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using ApiLibrary.Api;
+using Caliburn.Micro;
 using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using FaceitFinderUI.ViewModels;
@@ -6,6 +7,7 @@ using SqlLibrary.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +33,7 @@ namespace FaceitFinderUI
             _container.Instance(_container);
             _container.Singleton<LogOnEvent>();
 
-            _container.PerRequest<IValidateHelper,ValidateHelper>();
+            _container.PerRequest<IValidateHelper, ValidateHelper>().PerRequest<IFaceitApi, FaceitApi>();
 
             _container.Singleton<IWindowManager, WindowManager>().
                 Singleton<IEventAggregator, EventAggregator>().
