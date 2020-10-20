@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -42,17 +43,40 @@ namespace ApiLibrary.Api
         {
 
             using (HttpResponseMessage response = await _httpClient.GetAsync($"players?nickname={username}"))
+            {
                 if (response.IsSuccessStatusCode)
                 {
 
                     var content = await response.Content.ReadAsStringAsync();
-                    var output = JsonConvert.DeserializeObject<Example>(content);
+                    var output = JsonConvert.DeserializeObject<FaceitPlayerModel>(content);
+                    return output.player_id;
 
-                  
                 }
-            return "";
+
+                else throw new Exception(response.ReasonPhrase);
+            }
+          
 
         }
-        
+        public async Task<string> GetStatsByPlayerId(string id)
+        {
+
+            using (HttpResponseMessage response = await _httpClient.GetAsync($"players/{id}/stats/csgo"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var content = await response.Content.ReadAsStringAsync();
+                    var output = JsonConvert.DeserializeObject<FaceitCsgoModel>(content);
+                    nreturn output.game_id;
+
+                }
+
+                else throw new Exception(response.ReasonPhrase);
+            }
+
+
+        }
+
     }
 }

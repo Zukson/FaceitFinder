@@ -6,5 +6,6 @@ namespace ApiLibrary.Api
     {
         int MyProperty { get; set; }
         Task<string> GetPlayerIdByName(string username);
+        Task<string> GetStatsByPlayerId(string id);
     }
 }

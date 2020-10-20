@@ -24,8 +24,8 @@ namespace SqlLibrary.DataAccess
             using (IDbConnection sql = new SQLiteConnection(GetConnectionString("DB")))
             {
                 var output = await sql.QueryAsync<T>(query);
-                return output.ToList();
-
+                 return output.ToList();
+               
 
             }
 

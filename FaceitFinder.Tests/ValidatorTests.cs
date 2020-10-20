@@ -30,6 +30,8 @@ namespace FaceitFinder.Tests
             ValidateHelper validate = new ValidateHelper(null);
             var expected = Errors.Password;
             var actual = validate.IsDataValid(username, email, password);
+            Assert.Equal(expected, actual);
+
 
         }
 
@@ -102,7 +104,7 @@ namespace FaceitFinder.Tests
             ValidateHelper validateHelper = new ValidateHelper(null);
             //var expected = true;
 
-            var actual = validateHelper.CheckUsername(username);
+            var actual = validateHelper.CheckPassword(username);
 
             Assert.False(actual);
 

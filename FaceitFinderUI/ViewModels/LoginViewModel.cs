@@ -111,24 +111,11 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
-         var w=   await _api.GetPlayerIdByName("zukson");
+            string playerId = await _api.GetPlayerIdByName("zukson");
+          var w =   await _api.GetStatsByPlayerId(playerId);
             _logOnEvent.LogIn();
 
-            //try
-            //{
-            //    await _sqlHelper.SaveUser(new UserSqlModel
-            //    {
-            //        Email = "Kornio@wp.pl",
-            //        Nickname = "KornioxPompa",
-            //        Password = "Kornio3002"
-            //    });
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    throw;
-            //}
-            //TODO logika logowania
+          
         }
 
     }
