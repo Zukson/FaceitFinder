@@ -13,10 +13,12 @@ namespace FaceitFinderUI.ViewModels
     {
         private readonly ISqlHelper _sqlHelper;
         private LogOnEvent _logOnEvent;
-        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent )
+        private readonly IValidateHelper _validate;
+        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent,IValidateHelper validate )
         {
             _sqlHelper = sqlHelper;
             _logOnEvent = logOnEvent;
+            _validate=validate;
          
 
         }
@@ -62,6 +64,7 @@ namespace FaceitFinderUI.ViewModels
                 
                 _errorMessage = value;
                 NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);
             
             }
 
@@ -81,9 +84,33 @@ namespace FaceitFinderUI.ViewModels
 
             }
         }
+        public bool IsErrorVisible
+        {
+
+            get
+            {
+                bool output = false;
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+                return output;
+            }
+
+            set
+
+            {
+
+            }
+
+
+
+        }
         public async void Login()
         {
+            
             _logOnEvent.LogIn();
+
             //try
             //{
             //    await _sqlHelper.SaveUser(new UserSqlModel

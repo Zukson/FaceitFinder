@@ -11,22 +11,31 @@ namespace FaceitFinderUI.Helpers
         Password,
         Valid
     }
-    public  class ValidateHelper
+    public class ValidateHelper : IValidateHelper
     {
         ISqlHelper _sqlHelper;
         public ValidateHelper(ISqlHelper sqlHelper)
         {
             _sqlHelper = sqlHelper;
         }
-        public Errors IsDataValid(string username,string email,string password)
+        public Errors IsDataValid(string username, string email, string password)
         {
-            if(password.Length<8)
+
+
+
+            if (!CheckUsername(username))
             {
-                return Errors.Password;
+                return Errors.Nickname;
             }
-            if (!CheckEmail(email)) return Errors.Email;
-           
-            if (username.Length < 4)
+            if (!CheckEmail(email))
+            {
+                return Errors.Email;
+
+
+            }
+
+
+            if (!CheckPassword(password))
             {
                 return Errors.Password;
             }
@@ -34,31 +43,55 @@ namespace FaceitFinderUI.Helpers
             {
                 return Errors.Valid;
             }
-           
-        }
 
-       public   bool CheckEmail(string Email)
+        }
+        public bool CheckUsername(string username)
+        {
+            for (int i = 0; i < username.Length; i++)
+            {
+                if (username.Length > 20)
+                {
+                    return false;
+                }
+                else if (username[i] == ' ')
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
+        public bool CheckPassword(string password)
+        {
+            if (password.Length < 8)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool CheckEmail(string email)
         {
             bool isAt = false;
-            for(int i=0;i<Email.Length;i++)
+            for (int i = 0; i < email.Length; i++)
             {
-                if (Email[i] == '@') isAt = true;
+                if (email[i] == '@') isAt = true;
             }
-            if (Email.Length > 6 && isAt)
+            if (email.Length > 6 && isAt)
             {
                 return true;
             }
 
 
-            else { 
+            else
+            {
                 return false;
             }
-            
+
         }
 
-        //private bool IsUsernameFree(string username)
+        //private bool IsUsernameAndEmailFree(string username)
         //{
-           //TODO Sprawdzic czy podany uzytkwnik istnieje w bazie danych 
+        //TODO Sprawdzic czy podany uzytkwnik istnieje w bazie danych 
 
         //}
 

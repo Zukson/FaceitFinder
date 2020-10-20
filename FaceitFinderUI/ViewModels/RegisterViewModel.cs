@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FaceitFinderUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,29 @@ namespace FaceitFinderUI.ViewModels
 {
   public   class RegisterViewModel : Screen
     {
-		private string _mail;
+		
+		private readonly IValidateHelper _validate;
+		public RegisterViewModel(IValidateHelper validate)
+		{
+			_validate = validate;
+		}
+		private string _errorMessage;
 
+		public string ErrorMessage
+		{
+			get { return _errorMessage; }
+			set
+			{
+
+				_errorMessage = value;
+				NotifyOfPropertyChange(() => ErrorMessage);
+				NotifyOfPropertyChange(() => IsErrorVisible);
+
+			}
+
+
+		}
+		private string _mail;
 		public string Mail
 		{
 			get { return _mail; }
@@ -58,9 +80,63 @@ namespace FaceitFinderUI.ViewModels
 				return output;
 			}
 		}
-		public async void Register()
+
+		private Errors  IsValid()
+		{
+		var output=	_validate.IsDataValid(FaceitUsername, Mail, Password);
+			if(output == Errors.Email)
+			{
+				throw new ArgumentException("Email nie jest prawidlowy ");
+			}
+			if(output == Errors.Nickname)
+			{
+				throw new ArgumentException("Nickname nie jest prawidlowy ");
+			}
+			if(output==Errors.Password)
+			{
+				throw new ArgumentException("Haslo nie spelnia norm");
+			}
+			return Errors.Valid;
+		}
+		public bool IsErrorVisible
 		{
 
+			get
+			{
+				bool output = false;
+				if (ErrorMessage?.Length > 0)
+				{
+					output = true;
+				}
+				return output;
+			}
+
+			set
+
+			{
+
+			}
+
+
+
+		}
+		public async void Register()
+		{
+			try
+			{
+				if(IsValid()==Errors.Valid)
+				{
+
+				}
+			}
+			catch(ArgumentException ex)
+			{
+				ErrorMessage = ex.Message;
+			}
+			catch(Exception ex)
+			{
+				ErrorMessage = ex.Message;
+			}
 		}
 
 	}

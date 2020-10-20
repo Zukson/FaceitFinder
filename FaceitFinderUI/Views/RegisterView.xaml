@@ -17,10 +17,11 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition  Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
            
 
@@ -28,23 +29,24 @@
 
         </Grid.RowDefinitions>
         <TextBlock Text="Register Form" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="OrangeRed"  FontSize="60"/>
-        <StackPanel Grid.Row="1 " Grid.Column="1"  Grid.RowSpan="3" Grid.ColumnSpan="2" Margin=" 0 30 0  0" >
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
+        <TextBlock x:Name="ErrorMessage" Visibility="{Binding IsErrorVisible,Converter={StaticResource BooleanToVisiblityConverter}, FallbackValue=Collapsed}"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Foreground="Red"  Text="Witam" FontSize="30" Margin="20 0 0 0 "></TextBlock>
+        <StackPanel Grid.Row="2 " Grid.Column="1"  Grid.RowSpan="3" Grid.ColumnSpan="2" Margin=" 0 0 0  0" >
+            <StackPanel Orientation="Horizontal" Grid.Row="2" >
                 <TextBlock Text="Email" Margin="60 0 100 0 "  />
                 <TextBox x:Name="Mail" Height="50px" Width="300px"/>
 
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="2" >
+            <StackPanel Orientation="Horizontal" Grid.Row="3" >
                 <TextBlock Text="Faceit Username"   Margin="0 50 0 50 "/>
                 <TextBox x:Name="FaceitUsername" Height="50px" Width="300px" Margin=" 13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
             <TextBlock Text="Password" Margin="40 0 0 20"  />
                 <PasswordBox x:Name="Password" Height="50px" Width="300px" Margin="67 0 0 0"/>
             </StackPanel>
 
         </StackPanel>
-        <Button x:Name="Register" Margin="135 20 0 30"  HorizontalAlignment="Center" Height="70" Width="270"  Content="Register" Background="#FFEA4E05" Foreground="Black" Padding="5" Grid.Column="1" Grid.Row="5">
+        <Button x:Name="Register" Margin="135 20 0 30"  HorizontalAlignment="Center" Height="70" Width="270"  Content="Register" Background="#FFEA4E05" Foreground="Black" Padding="5" Grid.Column="1" Grid.Row="6">
             <Button.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
