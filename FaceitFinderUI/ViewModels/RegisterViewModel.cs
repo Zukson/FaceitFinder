@@ -81,7 +81,7 @@ namespace FaceitFinderUI.ViewModels
 			}
 		}
 
-		private Errors  IsValid()
+		private void  IsValid()
 		{
 		var output=	_validate.IsDataValid(FaceitUsername, Mail, Password);
 			if(output == Errors.Email)
@@ -96,7 +96,16 @@ namespace FaceitFinderUI.ViewModels
 			{
 				throw new ArgumentException("Haslo nie spelnia norm");
 			}
-			return Errors.Valid;
+			if(output==Errors.EmailReserverd)
+			{
+				throw new Exception("Konto z takim mailem juz istnieje");
+
+			}
+			if(output==Errors.NicknameReserved)
+			{
+				throw new Exception("Konto z taka nazwa juz istnieje");
+			}
+
 		}
 		public bool IsErrorVisible
 		{
@@ -120,14 +129,14 @@ namespace FaceitFinderUI.ViewModels
 
 
 		}
+		
 		public async void Register()
 		{
 			try
 			{
-				if(IsValid()==Errors.Valid)
-				{
+				IsValid();
 
-				}
+
 			}
 			catch(ArgumentException ex)
 			{
@@ -137,6 +146,7 @@ namespace FaceitFinderUI.ViewModels
 			{
 				ErrorMessage = ex.Message;
 			}
+
 		}
 
 	}

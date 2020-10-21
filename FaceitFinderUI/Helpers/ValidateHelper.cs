@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +10,8 @@ namespace FaceitFinderUI.Helpers
         Email,
         Nickname,
         Password,
+        NicknameReserved,
+        EmailReserverd,
         Valid
     }
     public class ValidateHelper : IValidateHelper
@@ -33,7 +36,7 @@ namespace FaceitFinderUI.Helpers
 
 
             }
-
+            
 
             if (!CheckPassword(password))
             {
@@ -41,6 +44,14 @@ namespace FaceitFinderUI.Helpers
             }
             else
             {
+                if(!IsUsernameFree())
+                {
+                    return Errors.NicknameReserved;
+                }
+                if(!IsEmailFree())
+                {
+                    return Errors.EmailReserverd;
+                }
                 return Errors.Valid;
             }
 
@@ -89,11 +100,16 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        //private bool IsUsernameAndEmailFree(string username)
-        //{
-        //TODO Sprawdzic czy podany uzytkwnik istnieje w bazie danych 
+        private bool IsUsernameFree(string username , List<FaceitModel> users)
+        { 
+       
 
-        //}
+        }
+
+        private bool IsEmailFree(string email, List<FaceitModel>users)
+        {
+
+        }
 
     }
 }
