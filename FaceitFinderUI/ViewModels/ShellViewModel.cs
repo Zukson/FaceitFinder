@@ -11,6 +11,7 @@ namespace FaceitFinderUI.ViewModels
         private RegisterViewModel _register;
         private LoginViewModel _login;
         private LogOnEvent _logOnEvent;
+      
     public   ShellViewModel(LoginViewModel login,RegisterViewModel register,LogOnEvent logOnEvent)
         {
             _register = register;
@@ -18,9 +19,15 @@ namespace FaceitFinderUI.ViewModels
             ActivateItem(_login) ;
             _logOnEvent = logOnEvent;
             _logOnEvent.LogInEvent += Login;
+            CreateAccountTextBlockEvent.Clicked += RegisterTextBlockClicked; 
+         
         }
 
         public void Login()
+        {
+            ActivateItem(_register);
+        }
+        public void RegisterTextBlockClicked()
         {
             ActivateItem(_register);
         }

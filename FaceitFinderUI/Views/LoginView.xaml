@@ -49,7 +49,7 @@
                         <ImageBrush/>
                     </Button.BorderBrush>
                 </Button>
-                <TextBlock Text="Create Account" Foreground="OrangeRed"  Margin="215 10 0 0" FontSize="20"/>
+                <TextBlock Text="Create Account" Foreground="OrangeRed"  Margin="215 10 0 0" FontSize="20" PreviewMouseDown="TextBlock_PreviewMouseDown" />
             </StackPanel>
         </StackPanel>
     </Grid>

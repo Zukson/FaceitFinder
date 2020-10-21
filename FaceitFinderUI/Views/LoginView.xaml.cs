@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FaceitFinderUI.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +19,17 @@ namespace FaceitFinderUI.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
+      
         public LoginView()
         {
             InitializeComponent();
+            
+        }
+
+        private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            CreateAccountTextBlockEvent.Pressed();
         }
     }
 }

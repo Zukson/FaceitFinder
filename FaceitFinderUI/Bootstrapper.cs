@@ -32,6 +32,7 @@ namespace FaceitFinderUI
             base.Configure();
             _container.Instance(_container);
             _container.Singleton<LogOnEvent>();
+            _container.Singleton<CreateAccountTextBlockEvent>();
 
             _container.PerRequest<IValidateHelper, ValidateHelper>().PerRequest<IFaceitApi, FaceitApi>();
 

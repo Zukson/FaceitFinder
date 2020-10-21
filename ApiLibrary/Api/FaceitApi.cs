@@ -13,7 +13,7 @@ namespace ApiLibrary.Api
     public class FaceitApi  : IFaceitApi
     {
 
-        public int MyProperty { get; set; }
+  
         HttpClient _httpClient;
 
         public FaceitApi( )
@@ -58,7 +58,7 @@ namespace ApiLibrary.Api
           
 
         }
-        public async Task<string> GetStatsByPlayerId(string id)
+        public async Task<FaceitCsgoModel> GetStatsByPlayerId(string id)
         {
 
             using (HttpResponseMessage response = await _httpClient.GetAsync($"players/{id}/stats/csgo"))
@@ -68,7 +68,7 @@ namespace ApiLibrary.Api
 
                     var content = await response.Content.ReadAsStringAsync();
                     var output = JsonConvert.DeserializeObject<FaceitCsgoModel>(content);
-                    nreturn output.game_id;
+                    return output;
 
                 }
 

@@ -9,7 +9,7 @@ namespace ApiLibrary.Models
     {
         public string player_id { get; set; }
         public string game_id { get; set; }
-        [JsonPropertyName("lifetime")]
+       
         public Lifetime lifetime { get; set; }
         public IList<Segment> segments { get; set; }
     }
