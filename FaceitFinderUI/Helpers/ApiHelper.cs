@@ -1,4 +1,6 @@
 ﻿using ApiLibrary.Api;
+using ApiLibrary.Models;
+using FaceitFinderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +19,11 @@ namespace FaceitFinderUI.Helpers
 
            return  await _api.GetPlayerIdByName(username);
         }
+        public async Task<FaceitCsgoModel>GetFaceitUserById(string id)
+        {
+            return await _api.GetStatsByPlayerId(id);
+        }
+
 
     }
 }

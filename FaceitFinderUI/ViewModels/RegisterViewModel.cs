@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
 using FaceitFinderUI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ namespace FaceitFinderUI.ViewModels
     {
 		
 		private readonly IValidateHelper _validate;
-		public RegisterViewModel(IValidateHelper validate)
+		IMapper _mapper;
+		public RegisterViewModel(IValidateHelper validate,IMapper mapper)
 		{
 			_validate = validate;
+			_mapper = mapper;
 		}
 		private string _errorMessage;
 

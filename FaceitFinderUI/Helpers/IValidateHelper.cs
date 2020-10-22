@@ -1,4 +1,7 @@
-﻿namespace FaceitFinderUI.Helpers
+﻿using FaceitFinderUI.Models;
+using System.Collections.Generic;
+
+namespace FaceitFinderUI.Helpers
 {
     public interface IValidateHelper
     {
@@ -6,7 +9,7 @@
         bool CheckPassword(string password);
         bool CheckUsername(string username);
         Errors IsDataValid(string username, string email, string password);
-        bool IsUsernameFree(string username, List<FaceitModel> users);
-        bool IsEmailFree(string email, List<FaceitModel> users);
+        bool IsUsernameFree(string username, List<UserModel> users);
+        bool IsEmailFree(string email, List<UserModel> users);
     }
 }

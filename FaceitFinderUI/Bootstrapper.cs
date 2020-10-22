@@ -1,7 +1,10 @@
 ﻿using ApiLibrary.Api;
+using ApiLibrary.Models;
+using AutoMapper;
 using Caliburn.Micro;
 using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
+using FaceitFinderUI.Models;
 using FaceitFinderUI.ViewModels;
 using SqlLibrary.DataAccess;
 using System;
@@ -26,6 +29,18 @@ namespace FaceitFinderUI
            PasswordBoxHelper.BoundPasswordProperty,
            "Password",
            "PasswordChanged");
+        }
+        private IMapper ConfigureMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
+
+
+            });
+            var output = config.CreateMapper();
+            return output;
+
         }
         protected override void Configure()
         {
