@@ -1,4 +1,5 @@
 ﻿using ApiLibrary.Models;
+using FaceitFinderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace FaceitFinderUI.Helpers
         {
             _sqlHelper = sqlHelper;
         }
-        public Errors IsDataValid(string username, string email, string password)
+        public Errors IsDataValid(string username, string email, string password,List<UserModel> users)
         {
 
 
@@ -44,11 +45,11 @@ namespace FaceitFinderUI.Helpers
             }
             else
             {
-                if(!IsUsernameFree())
+                if(!IsUsernameFree(username,users))
                 {
                     return Errors.NicknameReserved;
                 }
-                if(!IsEmailFree())
+                if(!IsEmailFree(email,users))
                 {
                     return Errors.EmailReserverd;
                 }
@@ -100,15 +101,35 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        private bool IsUsernameFree(string username , List<FaceitModel> users)
-        { 
-       
+        public bool IsUsernameFree(string username , List<UserModel> users)
+        {
+            bool output = true;
+            if (users == null || users.Count == 0) return output;
+            foreach (var user in users)
+            {
+                if (user.Nickname == username)
+                {
+                    output = false;
+                }
+
+            }
+            return output;
 
         }
 
-        private bool IsEmailFree(string email, List<FaceitModel>users)
+      public  bool IsEmailFree(string email, List<UserModel>users)
         {
+            bool output = true;
 
+            foreach(var user in users)
+            {
+                if (user.Email == email)
+                {
+                    output = false;
+                }
+              
+            }
+            return output;
         }
 
     }

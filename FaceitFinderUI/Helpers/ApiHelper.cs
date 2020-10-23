@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace FaceitFinderUI.Helpers
 {
-   public   class ApiHelper
+    public class ApiHelper : IApiHelper
     {
-       private  readonly IFaceitApi _api;
+        private readonly IFaceitApi _api;
         public ApiHelper(IFaceitApi api)
         {
-
+            _api = api;
         }
-        public async Task<string> GetPlayerId(string username) {
+        public async Task<FaceitPlayerModel> GetPlayerInfo(string username)
+        {
 
-           return  await _api.GetPlayerIdByName(username);
+            return await _api.GetPlayerInformationsByName(username);
         }
-        public async Task<FaceitCsgoModel>GetFaceitUserById(string id)
+        public async Task<FaceitCsgoModel> GetFaceitUserById(string id)
         {
             return await _api.GetStatsByPlayerId(id);
         }

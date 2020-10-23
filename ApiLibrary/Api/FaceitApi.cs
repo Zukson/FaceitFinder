@@ -39,7 +39,7 @@ namespace ApiLibrary.Api
             return output;
         }
 
-        public   async Task<string> GetPlayerIdByName(string username)
+        public   async Task<FaceitPlayerModel> GetPlayerInformationsByName(string username)
         {
 
             using (HttpResponseMessage response = await _httpClient.GetAsync($"players?nickname={username}"))
@@ -49,7 +49,7 @@ namespace ApiLibrary.Api
 
                     var content = await response.Content.ReadAsStringAsync();
                     var output = JsonConvert.DeserializeObject<FaceitPlayerModel>(content);
-                    return output.player_id;
+                    return output;
 
                 }
 

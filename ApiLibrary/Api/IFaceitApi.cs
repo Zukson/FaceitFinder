@@ -5,8 +5,8 @@ namespace ApiLibrary.Api
 {
     public interface IFaceitApi
     {
-       
-        Task<string> GetPlayerIdByName(string username);
+
+        Task<FaceitPlayerModel> GetPlayerInformationsByName(string username);
         Task<FaceitCsgoModel> GetStatsByPlayerId(string id);
     }
 }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using Xunit.Sdk;
+using FaceitFinderUI.Models;
+using Xunit.Extensions;
 
 namespace FaceitFinder.Tests
 {
@@ -108,9 +110,55 @@ namespace FaceitFinder.Tests
 
             Assert.False(actual);
 
+            var List = new List<UserModel>
+            { new UserModel{
+            Email="sdad"
+            },
+            new UserModel
+            {
+                Email="dada"
+            }
+            };
 
+            
+        }
+        [Theory]
+        
+        public void IsEmailAndNicknameFree_ShouldBeTrue()
+        {
+            string email = "Test@wp.pl";
+            string user = "Bidnir";
+            List<UserModel> users = new List<UserModel>
+            {
+                new UserModel
+                {
+                    Email="tatat",
+                    Nickname="midnir"
+                    
+                },
+        new UserModel
+                {
+                    Email="tatatadada",
+                    Nickname="midnir"
+                }
+
+
+        };
+            ValidateHelper validateHelper = new ValidateHelper(null);
+            Assert.True(validateHelper.IsEmailFree(email, users));
+            Assert.True(validateHelper.IsUsernameFree(email, users));
         }
 
 
+        public static List<UserModel> users = new List<UserModel>
+            { new UserModel{
+            Email="sdad"
+            },
+            new UserModel
+            {
+                Email="dada"
+            }
+            };
+        public static string test = "kornio@wp.pl";
     }
 }

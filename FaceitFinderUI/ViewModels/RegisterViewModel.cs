@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
 using FaceitFinderUI.Helpers;
+using FaceitFinderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.ViewModels
 {
@@ -12,10 +15,18 @@ namespace FaceitFinderUI.ViewModels
 		
 		private readonly IValidateHelper _validate;
 		IMapper _mapper;
-		public RegisterViewModel(IValidateHelper validate,IMapper mapper)
+		ISqlHelper _sql;
+		UserModel _currentPlayer;
+		IApiHelper _apiHelper;
+		IConverter _converter;
+		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter)
 		{
 			_validate = validate;
 			_mapper = mapper;
+			_sql = sql;
+			_currentPlayer = player;
+			_apiHelper = apiHelper;
+			_converter = converter;
 		}
 		private string _errorMessage;
 
@@ -84,9 +95,27 @@ namespace FaceitFinderUI.ViewModels
 			}
 		}
 
-		private void  IsValid()
+		public async Task SetUserModel(UserModel user)
 		{
-		var output=	_validate.IsDataValid(FaceitUsername, Mail, Password);
+			user.Email = Mail;
+			user.Password = Password;
+			user.Nickname = FaceitUsername;
+			user.Avatar = await GetUserAvatar(user.Nickname);
+			var apiUser = await _apiHelper.GetPlayerInfo(user.Nickname);
+			user.Playerid = apiUser.player_id;
+			
+		}
+		public async Task<BitmapImage> GetUserAvatar(string nickname)
+		{
+			var user = await _apiHelper.GetPlayerInfo(nickname);
+
+			BitmapImage bitmap = _converter.GetImgByUrl(user.avatar);
+			return bitmap;
+			
+		}
+		private  async Task IsValid()
+		{
+		var output   =	_validate.IsDataValid(FaceitUsername, Mail, Password, _mapper.Map<List<UserModel>>(await _sql.GetPlayers() ));
 			if(output == Errors.Email)
 			{
 				throw new ArgumentException("Email nie jest prawidlowy ");
@@ -137,7 +166,9 @@ namespace FaceitFinderUI.ViewModels
 		{
 			try
 			{
-				IsValid();
+				await IsValid();
+				await SetUserModel(_currentPlayer);
+				await _sql.SaveUser(_currentPlayer);
 
 
 			}

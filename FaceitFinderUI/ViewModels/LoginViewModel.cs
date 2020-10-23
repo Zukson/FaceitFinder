@@ -111,8 +111,10 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
-            string playerId = await _api.GetPlayerIdByName("zukson");
-          var w =   await _api.GetStatsByPlayerId(playerId);
+           
+             
+           var faceitApiPlayer = await _api.GetPlayerInformationsByName("zukson");
+          var w =   await _api.GetStatsByPlayerId(faceitApiPlayer.player_id);
             _logOnEvent.LogIn();
 
           

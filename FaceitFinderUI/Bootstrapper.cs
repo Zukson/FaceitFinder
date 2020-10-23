@@ -7,6 +7,7 @@ using FaceitFinderUI.Helpers;
 using FaceitFinderUI.Models;
 using FaceitFinderUI.ViewModels;
 using SqlLibrary.DataAccess;
+using SqlLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace FaceitFinderUI
             {
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
-
+                cfg.CreateMap<UserSqlModel, UserModel>();
             });
             var output = config.CreateMapper();
             return output;
@@ -46,14 +47,20 @@ namespace FaceitFinderUI
         {
             base.Configure();
             _container.Instance(_container);
+            _container.Instance<IMapper>(ConfigureMapper());
             _container.Singleton<LogOnEvent>();
             _container.Singleton<CreateAccountTextBlockEvent>();
+            _container.Singleton<UserModel>();
 
-            _container.PerRequest<IValidateHelper, ValidateHelper>().PerRequest<IFaceitApi, FaceitApi>();
+            _container.PerRequest<IValidateHelper, ValidateHelper>()
+                .PerRequest<IFaceitApi, FaceitApi>()
+                .PerRequest<IApiHelper,ApiHelper>()
+                .PerRequest<IConverter,Converter>()
+                .PerRequest<IMapperHelper,MapperHelper>();
 
             _container.Singleton<IWindowManager, WindowManager>().
                 Singleton<IEventAggregator, EventAggregator>().
-                Singleton<ISqlHelper,SqlHelper>().Singleton<ISqlData,SqlData>();
+                Singleton<ISqlHelper, SqlHelper>().Singleton<ISqlData, SqlData>();
          
             GetType().Assembly.GetTypes().Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))

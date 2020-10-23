@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.Models
 {
@@ -11,6 +12,10 @@ namespace FaceitFinderUI.Models
         public string game_id { get; set; }
 
         public LifetimeModel lifetime { get; set; }
-        public IList<SegmentModel> segments { get; set; }
+
+        public string FavoriteMap  { get; set; }
+        public BitmapImage MapImg { get; set; }
+
+         
     }
 }

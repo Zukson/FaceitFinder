@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FaceitFinderUI.Views"
         mc:Ignorable="d" Background="#1f1f1f"
-        Title="ShellView" Height="550" Width="900">
+        Title="ShellView" Height="570" Width="900">
     <Grid>
         <ContentControl x:Name="ActiveItem" Margin="5" Grid.ColumnSpan="2"></ContentControl>
     </Grid>
