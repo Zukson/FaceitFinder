@@ -53,7 +53,7 @@ namespace FaceitFinderUI.Helpers
 
             };
             string sql = @"Insert into Users (Nickname,Email,Password,Avatar) values (@Nickname,@Email,@Password,@Avatar)";
-            await _sqlData.SaveData<dynamic>(sql, user);
+            await _sqlData.SaveData<dynamic>(sql, parameters);
         }
     }
 }

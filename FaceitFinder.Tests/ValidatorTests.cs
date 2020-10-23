@@ -21,7 +21,7 @@ namespace FaceitFinder.Tests
         {
             ValidateHelper validate = new ValidateHelper(null);
             var expected = Errors.Valid;
-            var actual = validate.IsDataValid(username, email, password);
+            var actual = validate.IsDataValid(username, email, password, new List<UserModel>());
 
         }
         [Theory]
@@ -31,7 +31,7 @@ namespace FaceitFinder.Tests
         {
             ValidateHelper validate = new ValidateHelper(null);
             var expected = Errors.Password;
-            var actual = validate.IsDataValid(username, email, password);
+            var actual = validate.IsDataValid(username, email, password, new List<UserModel>());
             Assert.Equal(expected, actual);
 
 
@@ -122,8 +122,8 @@ namespace FaceitFinder.Tests
 
             
         }
-        [Theory]
-        
+        [Fact]
+
         public void IsEmailAndNicknameFree_ShouldBeTrue()
         {
             string email = "Test@wp.pl";
@@ -134,7 +134,33 @@ namespace FaceitFinder.Tests
                 {
                     Email="tatat",
                     Nickname="midnir"
-                    
+
+                },
+        new UserModel
+                {
+                    Email="tatatadada",
+                    Nickname="midnir"
+                }
+
+
+        };
+            ValidateHelper validateHelper = new ValidateHelper(null);
+            Assert.True(validateHelper.IsEmailFree(email, users));
+            Assert.True(validateHelper.IsUsernameFree(email, users));
+
+        }
+        [Fact]
+        public void IsEmailAndNicknameFree_ShouldBeFalse()
+        {
+            string email = "Test@wp.pl";
+            string user = "Bidnir";
+            List<UserModel> users = new List<UserModel>
+            {
+                new UserModel
+                {
+                    Email="tatat",
+                    Nickname="midnir"
+
                 },
         new UserModel
                 {

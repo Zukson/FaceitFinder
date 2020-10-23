@@ -25,8 +25,15 @@ namespace FaceitFinderUI.Helpers
         }
         public byte[] ConvertBitmapImageToBytes(BitmapImage img)
         {
-            ImageConverter imgCon = new ImageConverter();
-            return  (byte[])imgCon.ConvertTo(img, typeof(byte[]));
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(img));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+                return data;
+            }
         }
 
         public BitmapImage GetImgByUrl(string url)
