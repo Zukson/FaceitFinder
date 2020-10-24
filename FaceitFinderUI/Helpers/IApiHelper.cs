@@ -1,5 +1,6 @@
 ﻿using ApiLibrary.Models;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.Helpers
 {
@@ -7,5 +8,6 @@ namespace FaceitFinderUI.Helpers
     {
         Task<FaceitCsgoModel> GetFaceitUserById(string id);
         Task<FaceitPlayerModel> GetPlayerInfo(string username);
+        Task<BitmapImage> GetUserAvatar(string nickname);
     }
 }

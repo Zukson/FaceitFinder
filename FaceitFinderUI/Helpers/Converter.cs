@@ -36,13 +36,13 @@ namespace FaceitFinderUI.Helpers
             }
         }
 
-        public BitmapImage GetImgByUrl(string url)
+        public BitmapImage GetImgByUrl(string url)      
         {
             //WebClient client = new WebClient();
             // Stream stream =  client.OpenRead(url);
             BitmapImage bitmap;
-            
-            bitmap = new BitmapImage( new Uri(url));
+
+            bitmap = new BitmapImage(new Uri(url));
 
 
 

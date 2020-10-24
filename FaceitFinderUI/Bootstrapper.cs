@@ -33,12 +33,14 @@ namespace FaceitFinderUI
         }
         private IMapper ConfigureMapper()
         {
+            IConverter converter = new Converter();
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
-                cfg.CreateMap<UserSqlModel, UserModel>();
+                cfg.CreateMap<UserSqlModel, UserModel>().ForMember(x => x.Avatar,opt => opt.MapFrom(src=> new System.Windows.Media.Imaging.BitmapImage())); 
             });
+            
             var output = config.CreateMapper();
             return output;
 
@@ -50,13 +52,16 @@ namespace FaceitFinderUI
             _container.Instance<IMapper>(ConfigureMapper());
             _container.Singleton<LogOnEvent>();
             _container.Singleton<CreateAccountTextBlockEvent>();
+            _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
 
             _container.PerRequest<IValidateHelper, ValidateHelper>()
                 .PerRequest<IFaceitApi, FaceitApi>()
-                .PerRequest<IApiHelper,ApiHelper>()
-                .PerRequest<IConverter,Converter>()
-                .PerRequest<IMapperHelper,MapperHelper>();
+                .PerRequest<IApiHelper, ApiHelper>()
+                .PerRequest<IConverter, Converter>()
+                .PerRequest<IMapperHelper, MapperHelper>()
+                 .PerRequest<ISetterHelper, SetterHelper>();
+             
 
             _container.Singleton<IWindowManager, WindowManager>().
                 Singleton<IEventAggregator, EventAggregator>().

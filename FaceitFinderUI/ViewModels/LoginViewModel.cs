@@ -16,6 +16,7 @@ namespace FaceitFinderUI.ViewModels
         private LogOnEvent _logOnEvent;
         private readonly IValidateHelper _validate;
         IFaceitApi _api;
+       
         public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent,IValidateHelper validate,IFaceitApi api )
         {
             _sqlHelper = sqlHelper;
@@ -25,6 +26,7 @@ namespace FaceitFinderUI.ViewModels
          
 
         }
+        
 
         private string _username;
 

@@ -58,5 +58,7 @@
                 <ImageBrush/>
             </Button.BorderBrush>
         </Button>
+        <Image x:Name="TestImage" Grid.Row="2"   Grid.Column="3"></Image>
     </Grid>
+   
 </UserControl>

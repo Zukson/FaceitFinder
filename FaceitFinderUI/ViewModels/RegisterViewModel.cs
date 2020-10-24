@@ -10,16 +10,18 @@ using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.ViewModels
 {
-  public   class RegisterViewModel : Screen
-    {
-		
+	public class RegisterViewModel : Screen
+	{
+
 		private readonly IValidateHelper _validate;
 		IMapper _mapper;
 		ISqlHelper _sql;
 		UserModel _currentPlayer;
 		IApiHelper _apiHelper;
 		IConverter _converter;
-		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter)
+		ISetterHelper _setter;
+		
+		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter)
 		{
 			_validate = validate;
 			_mapper = mapper;
@@ -27,7 +29,11 @@ namespace FaceitFinderUI.ViewModels
 			_currentPlayer = player;
 			_apiHelper = apiHelper;
 			_converter = converter;
+			_setter = setter;
 		}
+
+		
+		
 		private string _errorMessage;
 
 		public string ErrorMessage
@@ -95,24 +101,8 @@ namespace FaceitFinderUI.ViewModels
 			}
 		}
 
-		public async Task SetUserModel(UserModel user)
-		{
-			user.Email = Mail;
-			user.Password = Password;
-			user.Nickname = FaceitUsername;
-			user.Avatar = await GetUserAvatar(user.Nickname);
-			var apiUser = await _apiHelper.GetPlayerInfo(user.Nickname);
-			user.Playerid = apiUser.player_id;
-			
-		}
-		public async Task<BitmapImage> GetUserAvatar(string nickname)
-		{
-			var user = await _apiHelper.GetPlayerInfo(nickname);
-
-			BitmapImage bitmap = _converter.GetImgByUrl(user.avatar);
-			return bitmap;
-			
-		}
+		
+		
 		private  async Task IsValid()
 		{
 		var output   =	_validate.IsDataValid(FaceitUsername, Mail, Password, _mapper.Map<List<UserModel>>(await _sql.GetPlayers() ));
@@ -167,8 +157,9 @@ namespace FaceitFinderUI.ViewModels
 			try
 			{
 				await IsValid();
-				await SetUserModel(_currentPlayer);
+				 _setter.SetUser(Mail,Password,FaceitUsername,await _apiHelper.GetUserAvatar(FaceitUsername));
 				await _sql.SaveUser(_currentPlayer);
+				
 
 
 			}
