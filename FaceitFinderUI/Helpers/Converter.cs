@@ -23,6 +23,7 @@ namespace FaceitFinderUI.Helpers
                 return image;
             }
         }
+        
         public byte[] ConvertBitmapImageToBytes(BitmapImage img)
         {
             byte[] data;
@@ -36,20 +37,16 @@ namespace FaceitFinderUI.Helpers
             }
         }
 
-        public BitmapImage GetImgByUrl(string url)      
+        public byte[] GetImgByUrl(string url)      
         {
-            //WebClient client = new WebClient();
-            // Stream stream =  client.OpenRead(url);
-            BitmapImage bitmap;
+        
+            using (var webClient = new WebClient())
+            {
+                byte[] imageBytes = webClient.DownloadData(url);
+                return imageBytes;
+            }
+            
 
-            bitmap = new BitmapImage(new Uri(url));
-
-
-
-            //stream.Flush();
-            //stream.Close();
-            //client.Dispose();
-            return bitmap;
         }
     }
 

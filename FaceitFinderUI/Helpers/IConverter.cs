@@ -6,6 +6,6 @@ namespace FaceitFinderUI.Helpers
     {
         byte[] ConvertBitmapImageToBytes(BitmapImage img);
         BitmapImage ConvertBytesToBitmapImage(byte[] bytes);
-        BitmapImage GetImgByUrl(string url);
+        byte[] GetImgByUrl(string url);
     }
 }

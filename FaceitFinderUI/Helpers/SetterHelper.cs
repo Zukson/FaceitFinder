@@ -3,23 +3,35 @@ using System;
 using System.Collections.Generic;
 using System.Security.RightsManagement;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.Helpers
 {
     public class SetterHelper : ISetterHelper
     {
-        UserModel _user;
-        public SetterHelper(UserModel user)
+        IApiHelper _apiHelper;
+        public SetterHelper(IApiHelper apiHelper)
         {
-            _user = user;
+            _apiHelper = apiHelper;
         }
-        public void SetUser(string mail, string password, string username, BitmapImage Avatar)
+        public async Task SetUser(string mail, string password, string username, byte[] Avatar,UserModel user)
         {
-            _user.Email = mail;
-            _user.Password = password;
-            _user.Nickname = username;
-            _user.Avatar = Avatar;
+            user.Email = mail;
+            user.Password = password;
+            user.Nickname = username;
+            user.Avatar = Avatar;
+            var player = await _apiHelper.GetPlayerInfo(username);
+            user.Playerid = player.player_id;
+
+        }
+
+        public async Task SetUserStats(FaceitUserModel userModel,string id)
+        {
+            var apiOutput = await _apiHelper.GetFaceitUserById(id);
+
+            userModel.
 
         }
     }

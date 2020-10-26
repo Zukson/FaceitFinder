@@ -41,19 +41,40 @@ namespace FaceitFinderUI.Helpers
 
         public async Task SaveUser(UserModel user)
         {
-            var avatar = _converter.ConvertBitmapImageToBytes(user.Avatar);
+            var avatar = user.Avatar;
             dynamic parameters = new
             {
 
                 Nickname = user.Nickname,
                 Email = user.Email,
                 Password = user.Password,
-                Avatar = avatar
+                Avatar = avatar,
+                PlayerId = user.Playerid
                 
 
             };
-            string sql = @"Insert into Users (Nickname,Email,Password,Avatar) values (@Nickname,@Email,@Password,@Avatar)";
+            string sql = GetSqlQuery("InsertIntoUsers");
             await _sqlData.SaveData<dynamic>(sql, parameters);
+        }
+
+        public async Task SaveUserStats(FaceitUserModel faceitUser)
+        {
+            //string sql = @"Insert into "
+            string sql = GetSqlQuery("InsertIntoFaceitStats");
+            dynamic parameters = new
+            {
+                Playerid = faceitUser.player_id,
+                FavoriteMapId = faceitUser.FavoriteMap,
+                GameId = faceitUser.game_id,
+                FavoriteMapImg = faceitUser.MapImg,
+                AverageHeadshots = faceitUser.lifetime.AverageHeadshots,
+                Kd = faceitUser.lifetime.Kd,
+                LongestWinStreak = faceitUser.lifetime.Longest_Win_Streak,
+                Matches = faceitUser.lifetime.Matches,
+                Wr = faceitUser.lifetime.WR,
+                Wins = faceitUser.lifetime.Wins
+            };
+          await  _sqlData.SaveData(sql, parameters);
         }
     }
 }

@@ -38,7 +38,8 @@ namespace FaceitFinderUI
             {
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
-                cfg.CreateMap<UserSqlModel, UserModel>().ForMember(x => x.Avatar,opt => opt.MapFrom(src=> new System.Windows.Media.Imaging.BitmapImage())); 
+                cfg.CreateMap<UserSqlModel, UserModel>();//.ForMember(x => x.Avatar,opt => opt.MapFrom(src=>new byte[6])); 
+                cfg.CreateMap<FaceitCsgoModel, FaceitPlayerModel>();
             });
             
             var output = config.CreateMapper();
@@ -54,6 +55,8 @@ namespace FaceitFinderUI
             _container.Singleton<CreateAccountTextBlockEvent>();
             _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
+            _container.Singleton<FaceitUserModel>();
+           
 
             _container.PerRequest<IValidateHelper, ValidateHelper>()
                 .PerRequest<IFaceitApi, FaceitApi>()

@@ -22,13 +22,8 @@ namespace FaceitFinderUI.Views
         public RegisterView()
         {
             InitializeComponent();
-            Test();
+         
         }
-        void Test()
-        {
-            Converter t = new Converter();
-          var x =   t.GetImgByUrl("https://i.wpimg.pl/1000x0/d.wpimg.pl/1754975740--211928981/kot-motylek.jpg");
-            TestImage.Source = x;
-        }
+        
     }
 }

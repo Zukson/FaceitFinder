@@ -10,7 +10,8 @@ namespace FaceitFinderUI.Models
         public string Nickname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public BitmapImage Avatar { get; set; }
-        //public string Playerid { get; set; }
+        public byte[] Avatar { get; set; }
+      
+        public string Playerid { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace FaceitFinderUI.Helpers
     {
         Task<FaceitCsgoModel> GetFaceitUserById(string id);
         Task<FaceitPlayerModel> GetPlayerInfo(string username);
-        Task<BitmapImage> GetUserAvatar(string nickname);
+        Task<byte[]> GetUserAvatar(string nickname);
     }
 }

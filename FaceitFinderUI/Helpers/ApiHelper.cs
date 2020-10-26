@@ -27,13 +27,19 @@ namespace FaceitFinderUI.Helpers
         {
             return await _api.GetStatsByPlayerId(id);
         }
-        public async Task<BitmapImage> GetUserAvatar(string nickname)
+        public async Task<byte[]> GetUserAvatar(string nickname)
         {
             var user = await GetPlayerInfo(nickname);
 
-            BitmapImage bitmap = _converter.GetImgByUrl(user.avatar);
-            return bitmap;
+           byte[] bytes = _converter.GetImgByUrl(user.avatar);
+            return bytes;
 
+        }
+
+        public async Task<FaceitCsgoModel> GetUserStats(string id)
+        {
+            var output = await _api.GetStatsByPlayerId(id);
+            return output;
         }
 
 

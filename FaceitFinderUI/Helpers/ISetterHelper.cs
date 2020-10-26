@@ -1,9 +1,11 @@
-﻿using System.Windows.Media.Imaging;
+﻿using FaceitFinderUI.Models;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.Helpers
 {
     public interface ISetterHelper
     {
-        void SetUser(string mail, string password, string username, BitmapImage Avatar);
+        Task SetUser(string mail, string password, string username, byte[] Avatar, UserModel user);
     }
 }
