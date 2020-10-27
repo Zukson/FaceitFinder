@@ -16,7 +16,7 @@ namespace FaceitFinderUI.Helpers
         {
             _apiHelper = apiHelper;
         }
-        public async Task SetUser(string mail, string password, string username, byte[] Avatar,UserModel user)
+        public async Task SetUser(string mail, string password, string username, byte[] Avatar, UserModel user)
         {
             user.Email = mail;
             user.Password = password;
@@ -27,11 +27,11 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        public async Task SetUserStats(FaceitUserModel userModel,string id)
+        public async Task SetUserStats(FaceitUserModel userModel, string id)
         {
             var apiOutput = await _apiHelper.GetFaceitUserById(id);
 
-            userModel.
+
 
         }
     }

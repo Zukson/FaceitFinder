@@ -165,6 +165,7 @@ namespace FaceitFinderUI.ViewModels
 				
 
 
+			
 			}
 			catch(ArgumentException ex)
 			{

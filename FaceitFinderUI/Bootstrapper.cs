@@ -39,7 +39,13 @@ namespace FaceitFinderUI
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
                 cfg.CreateMap<UserSqlModel, UserModel>();//.ForMember(x => x.Avatar,opt => opt.MapFrom(src=>new byte[6])); 
-                cfg.CreateMap<FaceitCsgoModel, FaceitPlayerModel>();
+                cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>()
+                .ForMember(faceitusermodel => faceitusermodel.MapImg, 
+                cfg => cfg.MapFrom((src) => MapperHelper.GetFavoriteMapImg(src.segments)))
+                .ForMember(faceituser => faceituser.FavoriteMap,
+                src=>src.MapFrom(faceitcsgo=>MapperHelper.GetFavoriteMapName(faceitcsgo.segments)))
+                
+                ;
             });
             
             var output = config.CreateMapper();

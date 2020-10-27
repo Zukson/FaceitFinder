@@ -14,8 +14,8 @@ namespace FaceitFinderUI.Models
         public LifetimeModel lifetime { get; set; }
 
         public string FavoriteMap  { get; set; }
-        public BitmapImage MapImg { get; set; }
-
+        //public byte[] MapImg { get; set; }
+        public string MapImg { get; set; }
          
     }
 }
