@@ -20,7 +20,7 @@ namespace FaceitFinderUI.ViewModels
 		IApiHelper _apiHelper;
 		IConverter _converter;
 		ISetterHelper _setter;
-		private FaceitUserModel faceitUser;
+		private FaceitUserModel _faceitUser;
 		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter, FaceitUserModel faceitUser)
 		{
 			_validate = validate;
@@ -30,7 +30,7 @@ namespace FaceitFinderUI.ViewModels
 			_apiHelper = apiHelper;
 			_converter = converter;
 			_setter = setter;
-			this.faceitUser = faceitUser;
+			_faceitUser = faceitUser;
 		}
 
 		
@@ -159,8 +159,10 @@ namespace FaceitFinderUI.ViewModels
 			{
 				await IsValid();
 				await _setter.SetUser(Mail,Password,FaceitUsername, await _apiHelper.GetUserAvatar(FaceitUsername),_currentPlayer);
-				await _setter.SetUserStats(faceitUser,_currentPlayer.Playerid);
+				 _faceitUser= await _setter.SetUserStats(_currentPlayer.Playerid);
 				await _sql.SaveUser(_currentPlayer);
+				await _sql.SaveUserStats(_faceitUser);
+
 
 				
 

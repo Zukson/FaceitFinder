@@ -20,15 +20,16 @@ namespace FaceitFinderUI.Helpers
             _converter = converter;
         }
 
-        static string GetFavoriteMapName(IList<Segment> maps)
+      public   static string GetFavoriteMapName(IList<Segment> maps)
         {
-          var favoriteMap=  maps.OrderBy(map=>map.stats.Matches).LastOrDefault();
+            var favoriteMap = maps.OrderBy(map => int.Parse(map.stats.Matches)).LastOrDefault();
+
 
             return favoriteMap.label;
         }
-        static string   GetFavoriteMapImg(IList<Segment> maps)
+     public   static string   GetFavoriteMapImg(IList<Segment> maps)
         {
-            var favoriteMap = maps.OrderBy(map => map.stats.Matches).LastOrDefault();
+            var favoriteMap = maps.OrderBy(map => int.Parse(map.stats.Matches)).LastOrDefault();
                                
 
 
@@ -43,5 +44,10 @@ namespace FaceitFinderUI.Helpers
         {
             return _mapper.Map<UserModel>(sqlModel);
         }
+        public static LifetimeModel MappLifeTimeModel(Lifetime lifetime,IMapper mapper)
+        {
+            return mapper.Map<LifetimeModel>(lifetime);
+        }
+
     }
 }

@@ -7,5 +7,6 @@ namespace FaceitFinderUI.Helpers
     public interface ISetterHelper
     {
         Task SetUser(string mail, string password, string username, byte[] Avatar, UserModel user);
+        Task<FaceitUserModel> SetUserStats( string id);
     }
 }

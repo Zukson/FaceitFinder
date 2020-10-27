@@ -4,6 +4,7 @@ using System.Text;
 
 namespace FaceitFinderUI.Models
 {
+    
     public class LifetimeModel
     {
      

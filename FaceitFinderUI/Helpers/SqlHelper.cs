@@ -66,7 +66,7 @@ namespace FaceitFinderUI.Helpers
                 Playerid = faceitUser.player_id,
                 FavoriteMapId = faceitUser.FavoriteMap,
                 GameId = faceitUser.game_id,
-                FavoriteMapImg = faceitUser.MapImg,
+                FavoriteMapImg = _converter.GetImgByUrl(faceitUser.MapImg),
                 AverageHeadshots = faceitUser.lifetime.AverageHeadshots,
                 Kd = faceitUser.lifetime.Kd,
                 LongestWinStreak = faceitUser.lifetime.Longest_Win_Streak,

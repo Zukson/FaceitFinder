@@ -1,4 +1,6 @@
-﻿using FaceitFinderUI.Models;
+﻿using AutoMapper;
+using AutoMapper.Mappers;
+using FaceitFinderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Security.RightsManagement;
@@ -12,9 +14,11 @@ namespace FaceitFinderUI.Helpers
     public class SetterHelper : ISetterHelper
     {
         IApiHelper _apiHelper;
-        public SetterHelper(IApiHelper apiHelper)
+        IMapper _mapper;
+        public SetterHelper(IApiHelper apiHelper,IMapper mapper)
         {
             _apiHelper = apiHelper;
+            _mapper = mapper;
         }
         public async Task SetUser(string mail, string password, string username, byte[] Avatar, UserModel user)
         {
@@ -27,10 +31,11 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        public async Task SetUserStats(FaceitUserModel userModel, string id)
+        public async Task<FaceitUserModel> SetUserStats( string id)
         {
-            var apiOutput = await _apiHelper.GetFaceitUserById(id);
+           var output  = _mapper.Map<FaceitUserModel>(await _apiHelper.GetFaceitUserById(id));
 
+            return output;
 
 
         }

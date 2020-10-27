@@ -31,6 +31,7 @@ namespace FaceitFinderUI
            "Password",
            "PasswordChanged");
         }
+       
         private IMapper ConfigureMapper()
         {
             IConverter converter = new Converter();
@@ -39,7 +40,9 @@ namespace FaceitFinderUI
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
                 cfg.CreateMap<UserSqlModel, UserModel>();//.ForMember(x => x.Avatar,opt => opt.MapFrom(src=>new byte[6])); 
+                cfg.CreateMap<Lifetime, LifetimeModel>();
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>()
+                .ForMember(faceitUserModel=>faceitUserModel.lifetime,dpt=>dpt.MapFrom(faceitcsgomodel=>MapperHelper.MappLifeTimeModel(faceitcsgomodel.lifetime, ConfigureMapper())))
                 .ForMember(faceitusermodel => faceitusermodel.MapImg, 
                 cfg => cfg.MapFrom((src) => MapperHelper.GetFavoriteMapImg(src.segments)))
                 .ForMember(faceituser => faceituser.FavoriteMap,
@@ -62,7 +65,7 @@ namespace FaceitFinderUI
             _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
             _container.Singleton<FaceitUserModel>();
-           
+
 
             _container.PerRequest<IValidateHelper, ValidateHelper>()
                 .PerRequest<IFaceitApi, FaceitApi>()

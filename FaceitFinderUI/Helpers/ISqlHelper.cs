@@ -10,5 +10,6 @@ namespace FaceitFinderUI.Helpers
         Task<UserSqlModel> GetPlayerByLoginData(string mail,string password);
         Task<List<UserSqlModel>> GetPlayers();
         Task SaveUser(UserModel user);
+        Task SaveUserStats(FaceitUserModel faceitUser);
     }
 }
