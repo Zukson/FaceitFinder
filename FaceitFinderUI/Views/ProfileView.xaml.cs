@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using FaceitFinderUI.Events;
+using FaceitFinderUI.Helpers;
+using FaceitFinderUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +25,10 @@ namespace FaceitFinderUI.Views
         public ProfileView()
         {
             InitializeComponent();
+
         }
+
+       
+
     }
 }

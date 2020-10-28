@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using FaceitFinderUI.Models;
 using System;
@@ -20,8 +21,10 @@ namespace FaceitFinderUI.ViewModels
 		IApiHelper _apiHelper;
 		IConverter _converter;
 		ISetterHelper _setter;
-		private FaceitUserModel _faceitUser;
-		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter, FaceitUserModel faceitUser)
+	 FaceitUserModel _faceitUser;
+		LogOnEvent _logOn;
+		TestModel _test;
+		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter, FaceitUserModel faceitUser,LogOnEvent logOn,TestModel test)
 		{
 			_validate = validate;
 			_mapper = mapper;
@@ -31,6 +34,8 @@ namespace FaceitFinderUI.ViewModels
 			_converter = converter;
 			_setter = setter;
 			_faceitUser = faceitUser;
+			_logOn = logOn;
+			_test = test;
 		}
 
 		
@@ -157,11 +162,15 @@ namespace FaceitFinderUI.ViewModels
 		{
 			try
 			{
+				_test.text = "dladladla";
+				ErrorMessage = "";
+				//naprawienie bugow rejestracji 
 				await IsValid();
 				await _setter.SetUser(Mail,Password,FaceitUsername, await _apiHelper.GetUserAvatar(FaceitUsername),_currentPlayer);
-				 _faceitUser= await _setter.SetUserStats(_currentPlayer.Playerid);
+				  await _setter.SetUserStats(_currentPlayer.Playerid,_faceitUser);
 				await _sql.SaveUser(_currentPlayer);
 				await _sql.SaveUserStats(_faceitUser);
+				_logOn.LogIn();
 
 
 				

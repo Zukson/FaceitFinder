@@ -23,13 +23,13 @@ namespace FaceitFinderUI.Helpers
 
             return await _api.GetPlayerInformationsByName(username);
         }
-        public async Task<FaceitCsgoModel> GetFaceitUserById(string id)
-        {
-            return await _api.GetStatsByPlayerId(id);
-        }
+        //public async Task<FaceitCsgoModel> GetFaceitUserById(string id)
+        //{
+        //    return await _api.GetStatsByPlayerId(id);
+        //}
         public async Task<byte[]> GetUserAvatar(string nickname)
         {
-            var user = await GetPlayerInfo(nickname);
+            var user = await    GetPlayerInfo(nickname);
 
            byte[] bytes = _converter.GetImgByUrl(user.avatar);
             return bytes;

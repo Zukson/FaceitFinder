@@ -65,7 +65,8 @@ namespace FaceitFinderUI
             _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
             _container.Singleton<FaceitUserModel>();
-
+            _container.Singleton<TestModel>();
+              
 
             _container.PerRequest<IValidateHelper, ValidateHelper>()
                 .PerRequest<IFaceitApi, FaceitApi>()

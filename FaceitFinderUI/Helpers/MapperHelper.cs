@@ -31,7 +31,7 @@ namespace FaceitFinderUI.Helpers
         {
             var favoriteMap = maps.OrderBy(map => int.Parse(map.stats.Matches)).LastOrDefault();
                                
-
+            
 
             return favoriteMap.img_regular;
         }

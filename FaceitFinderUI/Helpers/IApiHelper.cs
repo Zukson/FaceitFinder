@@ -6,8 +6,9 @@ namespace FaceitFinderUI.Helpers
 {
     public interface IApiHelper
     {
-        Task<FaceitCsgoModel> GetFaceitUserById(string id);
+       // Task<FaceitCsgoModel> GetFaceitUserById(string id);
         Task<FaceitPlayerModel> GetPlayerInfo(string username);
         Task<byte[]> GetUserAvatar(string nickname);
+        Task<FaceitCsgoModel> GetUserStats(string id);
     }
 }

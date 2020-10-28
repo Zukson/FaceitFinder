@@ -1,11 +1,14 @@
 ﻿using ApiLibrary.Api;
+using AutoMapper;
 using Caliburn.Micro;
 using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
+using FaceitFinderUI.Models;
 using SqlLibrary.DataAccess;
 using SqlLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace FaceitFinderUI.ViewModels
@@ -16,13 +19,25 @@ namespace FaceitFinderUI.ViewModels
         private LogOnEvent _logOnEvent;
         private readonly IValidateHelper _validate;
         IFaceitApi _api;
-       
-        public LoginViewModel(ISqlHelper sqlHelper, LogOnEvent logOnEvent,IValidateHelper validate,IFaceitApi api )
+        UserModel _user;
+        IMapper _mapper;
+        FaceitUserModel _faceitUser;
+        public LoginViewModel(
+            ISqlHelper sqlHelper,
+            LogOnEvent logOnEvent,
+            IValidateHelper validate,
+            IFaceitApi api,
+            UserModel user,
+            IMapper mapper,
+            FaceitUserModel faceitUser)
         {
             _sqlHelper = sqlHelper;
             _logOnEvent = logOnEvent;
             _validate=validate;
             _api = api;
+            _user = user;
+            _mapper = mapper;
+            _faceitUser = faceitUser;
          
 
         }
@@ -43,7 +58,7 @@ namespace FaceitFinderUI.ViewModels
             
             }
         }
-
+        
         private string _password;
 
         public string Password
@@ -113,13 +128,19 @@ namespace FaceitFinderUI.ViewModels
         }
         public async void Login()
         {
-           
-             
-           var faceitApiPlayer = await _api.GetPlayerInformationsByName("zukson");
-          var w =   await _api.GetStatsByPlayerId(faceitApiPlayer.player_id);
-            _logOnEvent.LogIn();
+            ErrorMessage = null;
+            try
+            {
+           _user = _mapper.Map<UserModel>(  await _validate.CheckLoginData(Username, Password));
 
-          
+                _faceitUser = _mapper.Map<FaceitUserModel>(await _api.GetStatsByPlayerId(_user.Playerid));
+            }
+           
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+       
         }
 
     }

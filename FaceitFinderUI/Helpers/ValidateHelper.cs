@@ -1,8 +1,11 @@
 ﻿using ApiLibrary.Models;
+using AutoMapper;
 using FaceitFinderUI.Models;
+using SqlLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FaceitFinderUI.Helpers
 {
@@ -129,6 +132,17 @@ namespace FaceitFinderUI.Helpers
                 }
               
             }
+            return output;
+        }
+
+     public async Task<UserSqlModel> CheckLoginData(string email,string password)
+        {
+            var output = await _sqlHelper.GetPlayerByLoginData(email, password);
+                if(output==null)
+              {
+                throw new Exception("Podane dane są nieprawidłowe");
+              }
+
             return output;
         }
 

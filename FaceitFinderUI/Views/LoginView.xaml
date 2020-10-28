@@ -26,8 +26,8 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="ErrorMessage" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  Foreground="Red"  Text="Test"  Visibility="{Binding IsErrorVisible,Converter={StaticResource BooleanToVisiblityConverter}, FallbackValue=Collapsed}" FontSize="30" Margin="50 50 0 0"></TextBlock>
         <StackPanel  Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <StackPanel Grid.Row="1"  Orientation="Horizontal">
-                <TextBlock Text="Login" Margin=" 20 0 40 10"/>
+            <StackPanel Grid.Row="1"  Orientation="Horizontal" Margin="0 0 0 30">
+                <TextBlock Text="Email" Margin=" 23 0 40 10"/>
                 <TextBox x:Name="Username" Height="50px" Width="300px"/>
 
             </StackPanel>
@@ -36,8 +36,8 @@
                 <PasswordBox x:Name="Password" Height="50px" Width="300px"/>
 
             </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Button x:Name="Login" Margin="135 20 0 0" HorizontalAlignment="Center" Height="70" Width="270"  Content="Login" Foreground="Black" Padding="5" Background="#FFEA4E05">
+            <StackPanel Orientation="Vertical" >
+                <Button x:Name="Login" Margin="135 40 0 0" HorizontalAlignment="Center" Height="70" Width="270"  Content="Login" Foreground="Black" Padding="5" Background="#FFEA4E05">
                     <Button.OpacityMask>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black"/>

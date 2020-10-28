@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FaceitFinderUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="900" Background="#1f1f1f" FontSize="18px">
+             d:DesignHeight="550" d:DesignWidth="900" Background="#1f1f1f" FontSize="21px"  Foreground="OrangeRed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -23,36 +23,45 @@
        <!-- Kolumna 1 Wiersz 0-->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
 
-            <Image></Image>
-            <TextBlock x:Name="Nick"> </TextBlock>
-            <Image></Image>
+            <Image x:Name="Avatar"  Height="auto" Width="auto"></Image>
+            <TextBlock x:Name="Nick" Height="auto" Width="auto" Margin="20 60 0  0"> </TextBlock>
+            
         </StackPanel>
        <!--  wiersz 1-->
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="30 0">
-                <TextBlock Text="Matches"/>
-                <TextBlock  x:Name="Matches" Grid.Row="1 "  />
+                <TextBlock Text="Matches" HorizontalAlignment="Center"/>
+                <TextBlock  x:Name="Matches" Grid.Row="1 "  HorizontalAlignment="Center" />
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="2" Margin="30 0">
-                <TextBlock Text="WinStreak"/>
-                <TextBlock  x:Name="WinStreak" Grid.Row="1 " Grid.Column="2"  />
+                <TextBlock Text="WinStreak" HorizontalAlignment="Center"/>
+                <TextBlock  x:Name="WinStreak" Grid.Row="1 " Grid.Column="2" HorizontalAlignment="Center"  />
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="3" Margin="30 0">
-                <TextBlock Text="WinRate"/>
-                <TextBlock  x:Name="WinRate" Grid.Row="1 " Grid.Column="3" />
+                <TextBlock Text="WinRate" HorizontalAlignment="Center"/>
+                <TextBlock  x:Name="WinRate" Grid.Row="1 " Grid.Column="3"  HorizontalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="4">
-                <TextBlock Text="Win"/>
-                <TextBlock x:Name="Wins" Grid.Row="1 " Grid.Column="4"  Margin="30 0"/>
+                <TextBlock Text="Wins" HorizontalAlignment="Center" />
+                <TextBlock x:Name="Wins" Grid.Row="1 " Grid.Column="4"  Margin="30 0" HorizontalAlignment="Center"/>
                              </StackPanel>
         </StackPanel>
         <!--  wiersz 2-->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
-            <TextBlock x:Name="Kd" />
-            <TextBlock x:Name="Hs" />
-            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.ColumnSpan="2">
-                <Image/>
-                <TextBlock x:Name="FavoriteMap"/>
+            <StackPanel Orientation="Vertical" Margin="50 0" Grid.Column="1" >
+                <TextBlock Text="Kd" HorizontalAlignment="Center"> </TextBlock>
+                <TextBlock x:Name="Kd" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="70 0">
+                <TextBlock Text="HS%" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="Hs" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.ColumnSpan="2" Margin="30 0">
+
+                <Image x:Name="MapImg" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="FavoriteMap" HorizontalAlignment="Center"/>
 
             </StackPanel>
         </StackPanel>    

@@ -31,11 +31,16 @@ namespace FaceitFinderUI.Helpers
 
         }
 
-        public async Task<FaceitUserModel> SetUserStats( string id)
+        public async Task SetUserStats( string id,FaceitUserModel userModel)
         {
-           var output  = _mapper.Map<FaceitUserModel>(await _apiHelper.GetFaceitUserById(id));
+           var output  = _mapper.Map<FaceitUserModel>(await _apiHelper.GetUserStats(id));
 
-            return output;
+            userModel.FavoriteMap = output.FavoriteMap;
+            userModel.game_id = output.game_id;
+            userModel.lifetime = output.lifetime;
+            userModel.MapImg = output.MapImg;
+            userModel.player_id = output.player_id;
+            
 
 
         }
