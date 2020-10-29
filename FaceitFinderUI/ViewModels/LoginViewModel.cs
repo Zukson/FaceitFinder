@@ -21,6 +21,7 @@ namespace FaceitFinderUI.ViewModels
         IFaceitApi _api;
         UserModel _user;
         IMapper _mapper;
+        IMapperHelper _mapperHelper;
         FaceitUserModel _faceitUser;
         public LoginViewModel(
             ISqlHelper sqlHelper,
@@ -29,6 +30,7 @@ namespace FaceitFinderUI.ViewModels
             IFaceitApi api,
             UserModel user,
             IMapper mapper,
+            IMapperHelper mapperHelper,
             FaceitUserModel faceitUser)
         {
             _sqlHelper = sqlHelper;
@@ -38,6 +40,7 @@ namespace FaceitFinderUI.ViewModels
             _user = user;
             _mapper = mapper;
             _faceitUser = faceitUser;
+            _mapperHelper = mapperHelper;
          
 
         }
@@ -125,15 +128,18 @@ namespace FaceitFinderUI.ViewModels
 
 
 
-        }
+        }   
         public async void Login()
         {
             ErrorMessage = null;
             try
             {
-           _user = _mapper.Map<UserModel>(  await _validate.CheckLoginData(Username, Password));
-
+                var sqlUserModel = await _validate.CheckLoginData(Username, Password);
+                _mapperHelper.MapToSingletonUserModel(sqlUserModel,_user);
+                var faceitCsgoModel = await _api.GetStatsByPlayerId(_user.Playerid);
+                _mapperHelper.MapToSingletonFaceitModel(faceitCsgoModel,_faceitUser);
                 _faceitUser = _mapper.Map<FaceitUserModel>(await _api.GetStatsByPlayerId(_user.Playerid));
+                _logOnEvent.LogIn();
             }
            
             catch(Exception ex)

@@ -88,7 +88,7 @@ namespace FaceitFinderUI.ViewModels
         {
             get
             {
-                return _winRate;
+                return $"{_winRate}%";
             }
             set
             {
@@ -128,7 +128,7 @@ namespace FaceitFinderUI.ViewModels
         {
             get
             {
-                return _hs;
+                return $"{_hs}%";
             }
             set
             {
@@ -176,9 +176,9 @@ namespace FaceitFinderUI.ViewModels
                 _mapImg = value;
             }
         }
-      public  void  LogOn()
+      public  async void  LogOn()
         {
-             SetUserStatsToProperties();
+          await   SetUserStatsToProperties();
            
         }
         

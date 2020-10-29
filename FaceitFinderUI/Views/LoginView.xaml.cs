@@ -29,7 +29,7 @@ namespace FaceitFinderUI.Views
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            CreateAccountTextBlockEvent.Pressed();
+            TextBlockClickEvent.RegisterPressed();
         }
     }
 }

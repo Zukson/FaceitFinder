@@ -61,7 +61,7 @@ namespace FaceitFinderUI
             _container.Instance(_container);
             _container.Instance<IMapper>(ConfigureMapper());
             _container.Singleton<LogOnEvent>();
-            _container.Singleton<CreateAccountTextBlockEvent>();
+            _container.Singleton<TextBlockClickEvent>();
             _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
             _container.Singleton<FaceitUserModel>();

@@ -1,6 +1,4 @@
-﻿using Caliburn.Micro;
-using FaceitFinderUI.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -10,20 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FaceitFinderUI.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy ShellView.xaml
+    /// Logika interakcji dla klasy SearchView.xaml
     /// </summary>
-    public partial class ShellView : Window
+    public partial class SearchView : UserControl
     {
-        public ShellView()
+        public SearchView()
         {
             InitializeComponent();
-            
-    
         }
     }
 }

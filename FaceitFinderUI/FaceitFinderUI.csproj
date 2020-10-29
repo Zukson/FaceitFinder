@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Rafiqul-Hassan-Blogger-Search.ico</ApplicationIcon>
-    <AssemblyName>nnnnnnnnnnnnnnn</AssemblyName>
+    <ApplicationIcon>search-64.ico</ApplicationIcon>
+    <AssemblyName>FaceitFinder</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +21,12 @@
 
   <ItemGroup>
     <None Update="Database\FaceitFinderDb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="icons\Rafiqul-Hassan-Blogger-Search.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="icons\search.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
