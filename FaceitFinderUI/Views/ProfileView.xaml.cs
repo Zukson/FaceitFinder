@@ -28,7 +28,9 @@ namespace FaceitFinderUI.Views
 
         }
 
-       
-
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlockClickEvent.SearchPressed();
+        }
     }
 }

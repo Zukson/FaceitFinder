@@ -45,10 +45,17 @@ namespace FaceitFinderUI.ViewModels
 
         public async void Search()
         {
-            var user = await _api.GetPlayerInfo(Nick);
+            try
+            {
+                var user = await _api.GetPlayerInfo(Nick);
 
-          var faceitUser = await  _api.GetUserStats(user.player_id);
-            _mapperHelper.MapToSingletonFaceitModel(faceitUser, _faceitUser);
+                var faceitUser = await _api.GetUserStats(user.player_id);
+                _mapperHelper.MapToSingletonFaceitModel(faceitUser, _faceitUser);
+            }
+           catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
 

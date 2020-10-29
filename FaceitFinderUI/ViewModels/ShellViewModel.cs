@@ -14,21 +14,26 @@ namespace FaceitFinderUI.ViewModels
         private LogOnEvent _logOnEvent;
         private RegisterEvent _registerEvent;
         private ProfileViewModel _profile;
+        private SearchViewModel _search;
     public   ShellViewModel(LoginViewModel login,
                             RegisterViewModel register,
                             LogOnEvent logOnEvent,
                             RegisterEvent registerEvent,
-                            ProfileViewModel profile                      )
+                            ProfileViewModel profile,
+                            SearchViewModel search)
         {
             _register = register;
             _login = login;
+            _search = search;
             ActivateItem(_login) ;
             _logOnEvent = logOnEvent;
             _logOnEvent.LogInEvent += Login;
             TextBlockClickEvent.RegisterClicked += RegisterTextBlockClicked;
+            TextBlockClickEvent.SearchClicked += SearchTexBlockClicked;
             _registerEvent = registerEvent;
             _registerEvent.Registered += Registered;
             _profile = profile;
+            
          
         }
 
@@ -43,6 +48,10 @@ namespace FaceitFinderUI.ViewModels
         public void RegisterTextBlockClicked()
         {
             ActivateItem(_register);
+        }
+        public void SearchTexBlockClicked()
+        {
+            ActivateItem(_search);
         }
     }
 }

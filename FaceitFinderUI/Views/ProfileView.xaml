@@ -24,10 +24,11 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
 
             <Image x:Name="Avatar"  Height="auto" Width="auto"></Image>
-            <TextBlock x:Name="Nick" Height="auto" Width="auto" Margin="20 60 0  0"> </TextBlock>
+            <TextBlock x:Name="Nick" Height="auto" Width="auto" Margin="20 60 0  0" Foreground="White" FontSize="27"> </TextBlock>
             
         </StackPanel>
        <!--  wiersz 1-->
+        <TextBlock Text="Search" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center " Foreground="white" FontSize="30" Margin=" 10 0 0 0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"> </TextBlock>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="30 0">
                 <TextBlock Text="Matches" HorizontalAlignment="Center"/>
