@@ -8,6 +8,6 @@ namespace FaceitFinderUI.Models
     {
         public string player_id { get; set; }
         public string nickname { get; set; }
-        public string avatar { get; set; }
+        public byte[] avatar { get; set; }
     }
 }

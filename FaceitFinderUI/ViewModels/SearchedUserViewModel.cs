@@ -18,7 +18,7 @@ namespace FaceitFinderUI.ViewModels
         SearchEvent _searchEvent;
 
 
-        public SearchedUserViewModel(FaceitUserModel faceituser, UserModel userModel, IConverter converter, LogOnEvent logOn,SearchEvent searchEvent)
+        public SearchedUserViewModel(SearchedFaceitUserModel faceituser, SearchedUserModel userModel, IConverter converter, LogOnEvent logOn,SearchEvent searchEvent)
         {
             _faceitUser = faceituser;
             _userModel = userModel;
@@ -31,8 +31,8 @@ namespace FaceitFinderUI.ViewModels
 
         public async Task SetUserStatsToProperties()
         {
-            Nick = _userModel.Nickname;
-            Avatar = _converter.ConvertBytesToBitmapImage(_userModel.Avatar);
+            Nick = _userModel.nickname;
+            Avatar = _converter.ConvertBytesToBitmapImage(_userModel.avatar);
             Matches = _faceitUser.lifetime.Matches;
             WinStreak = _faceitUser.lifetime.Longest_Win_Streak;
             WinRate = _faceitUser.lifetime.WR;
@@ -189,4 +189,4 @@ namespace FaceitFinderUI.ViewModels
 
     }
 }
-}
+

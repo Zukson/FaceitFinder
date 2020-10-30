@@ -37,7 +37,14 @@ namespace FaceitFinderUI
             IConverter converter = new Converter();
             var config = new MapperConfiguration(cfg =>
             {
-               
+
+                // cfg.CreateMap<FaceitPlayerModel, SearchedUserModel>();
+                cfg.CreateMap<FaceitCsgoModel, SearchedFaceitUserModel>()
+                .ForMember(faceitUserModel => faceitUserModel.lifetime, dpt => dpt.MapFrom(faceitcsgomodel => MapperHelper.MappLifeTimeModel(faceitcsgomodel.lifetime, ConfigureMapper())))
+                .ForMember(faceitusermodel => faceitusermodel.MapImg,
+                cfg => cfg.MapFrom((src) => MapperHelper.GetFavoriteMapImg(src.segments)))
+                .ForMember(faceituser => faceituser.FavoriteMap,
+                src => src.MapFrom(faceitcsgo => MapperHelper.GetFavoriteMapName(faceitcsgo.segments)));
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
                 cfg.CreateMap<UserSqlModel, UserModel>();//.ForMember(x => x.Avatar,opt => opt.MapFrom(src=>new byte[6])); 
@@ -67,6 +74,8 @@ namespace FaceitFinderUI
             _container.Singleton<UserModel>();
             _container.Singleton<FaceitUserModel>();
             _container.Singleton<SearchEvent>();
+            _container.Singleton<SearchedFaceitUserModel>();
+            _container.Singleton<SearchedUserModel>();
 
 
 

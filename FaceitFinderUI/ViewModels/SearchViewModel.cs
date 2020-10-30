@@ -15,7 +15,7 @@ namespace FaceitFinderUI.ViewModels
         IApiHelper _api;
         IMapperHelper _mapperHelper;
         SearchEvent _searchEvent;
-        SearchedUserModel _user;
+       
         SearchedUserModel _searchedUser;
         public SearchViewModel(SearchedFaceitUserModel faceitUser,IApiHelper api,IMapperHelper mapperHelper,SearchEvent searchEvent, SearchedUserModel searchedUser)
         {
@@ -27,7 +27,14 @@ namespace FaceitFinderUI.ViewModels
             _searchedUser = searchedUser;
         }
 
+        public bool IsErrorVisible
+        {
 
+            get
+            {
+                return true;
+            }
+        }
 
         private string _errorMessage;
 
@@ -36,7 +43,7 @@ namespace FaceitFinderUI.ViewModels
             get { return _errorMessage; }
             set { 
                 _errorMessage = value;
-                NotifyOfPropertyChange(ErrorMessage);
+                NotifyOfPropertyChange(()=>ErrorMessage);
             }
         }
 
@@ -57,8 +64,8 @@ namespace FaceitFinderUI.ViewModels
                 var user = await _api.GetPlayerInfo(Nick);
 
                 var faceitUser = await _api.GetUserStats(user.player_id);
-                _mapperHelper.MapToSingletonUserModel(user, _user);
-                _mapperHelper.MapToSingletonFaceitModel(faceitUser, _searchedFaceitUser);
+                _mapperHelper.MapToSingletonSearchedUserModel(user, _searchedUser);
+                _mapperHelper.MapToSingletonSearchedFaceitModel(faceitUser, _searchedFaceitUser);
                 _searchEvent.OnSearched();
             }
            catch(Exception ex)

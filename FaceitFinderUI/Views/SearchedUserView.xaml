@@ -28,7 +28,7 @@
 
         </StackPanel>
         <!--  wiersz 1-->
-        <TextBlock Text="Search" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center " Foreground="white" FontSize="30" Margin=" 10 0 0 0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"></TextBlock>
+        <TextBlock Text="Search" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center " Foreground="white" FontSize="30" Margin=" 10 0 0 0" ></TextBlock>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="30 0">
                 <TextBlock Text="Matches" HorizontalAlignment="Center"/>

@@ -2,6 +2,7 @@
 using ApiLibrary.Models;
 using AutoMapper;
 using FaceitFinderUI.Models;
+using Microsoft.VisualBasic.CompilerServices;
 using SqlLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,24 @@ namespace FaceitFinderUI.Helpers
             singleton.Nickname = output.Nickname;
             singleton.Password = output.Password;
             singleton.Playerid = output.Playerid;
+        }
+        public void MapToSingletonSearchedUserModel(FaceitPlayerModel model, SearchedUserModel singleton)
+        {
+        
+            singleton.avatar = _converter.GetImgByUrl (model.avatar);
+            singleton.nickname = model.nickname;
+            singleton.player_id = model.player_id;
+           
+        }
+        public void MapToSingletonSearchedFaceitModel(FaceitCsgoModel faceitModel,SearchedFaceitUserModel singleton)
+        {
+            var output = _mapper.Map<SearchedFaceitUserModel>(faceitModel);
+            singleton.FavoriteMap = output.FavoriteMap;
+            singleton.game_id = output.game_id;
+            singleton.lifetime = output.lifetime;
+            singleton.MapImg = output.MapImg;
+            singleton.player_id = output.player_id;
+
         }
 
         public void  MapToSingletonFaceitModel(FaceitCsgoModel faceitModel, FaceitUserModel singleton)

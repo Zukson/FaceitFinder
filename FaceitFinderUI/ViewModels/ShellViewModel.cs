@@ -16,13 +16,15 @@ namespace FaceitFinderUI.ViewModels
         private ProfileViewModel _profile;
         private SearchViewModel _search;
         private SearchEvent _searchEvent;
+        private  SearchedUserViewModel _searchedVm;
     public   ShellViewModel(LoginViewModel login,
                             RegisterViewModel register,
                             LogOnEvent logOnEvent,
                             RegisterEvent registerEvent,
                             ProfileViewModel profile,
                             SearchViewModel search,
-                            SearchEvent searchEvent)
+                            SearchEvent searchEvent,
+                            SearchedUserViewModel searchedVm)
         {
             _register = register;
             _login = login;
@@ -38,6 +40,7 @@ namespace FaceitFinderUI.ViewModels
             _search=search;
             _searchEvent = searchEvent;
             _searchEvent.Searched += Searched;
+            _searchedVm = searchedVm;
             
          
         }
@@ -60,7 +63,7 @@ namespace FaceitFinderUI.ViewModels
         }
         public void Searched()
         {
-            ActivateItem(_profile);
+            ActivateItem(_searchedVm);
         }
     }
 }
