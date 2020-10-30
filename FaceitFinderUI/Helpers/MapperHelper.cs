@@ -16,11 +16,13 @@ namespace FaceitFinderUI.Helpers
         readonly IMapper _mapper;
         IConverter _converter;
         IValidateHelper _validate;
+       
         public MapperHelper(IMapper mapper,IConverter  converter, IValidateHelper validate)
         {
             _mapper = mapper;
             _converter = converter;
             _validate = validate;
+          
         }
 
       public   static string GetFavoriteMapName(IList<Segment> maps)
@@ -47,9 +49,20 @@ namespace FaceitFinderUI.Helpers
         {
             return _mapper.Map<UserModel>(sqlModel);
         }
-        public void  MapToSingletonUserModel(UserSqlModel sqlModel, UserModel singleton)
+        public void  MapToSingletonUserModel(FaceitPlayerModel model, UserModel singleton)
         {
-            var output = _mapper.Map<UserModel>(sqlModel);
+            var output = _mapper.Map<UserModel>(model);
+            output.Avatar = _converter.GetImgByUrl(model.avatar);
+            singleton.Avatar = output.Avatar;
+            singleton.CountryImg = output.CountryImg;
+            singleton.Email = output.Email;
+            singleton.Nickname = output.Nickname;
+            singleton.Password = output.Password;
+            singleton.Playerid = output.Playerid;
+        }
+        public void MapToSingletonUserModelSql(UserSqlModel model, UserModel singleton)
+        {
+            var output = _mapper.Map<UserModel>(model);
             singleton.Avatar = output.Avatar;
             singleton.CountryImg = output.CountryImg;
             singleton.Email = output.Email;
@@ -58,7 +71,7 @@ namespace FaceitFinderUI.Helpers
             singleton.Playerid = output.Playerid;
         }
 
-            public void  MapToSingletonFaceitModel(FaceitCsgoModel faceitModel, FaceitUserModel singleton)
+        public void  MapToSingletonFaceitModel(FaceitCsgoModel faceitModel, FaceitUserModel singleton)
             {
                 var output = _mapper.Map<FaceitUserModel>(faceitModel);
             singleton.FavoriteMap = output.FavoriteMap;

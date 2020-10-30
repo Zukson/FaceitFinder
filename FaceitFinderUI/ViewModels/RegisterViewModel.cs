@@ -23,8 +23,8 @@ namespace FaceitFinderUI.ViewModels
 		ISetterHelper _setter;
 	 FaceitUserModel _faceitUser;
 		LogOnEvent _logOn;
-		TestModel _test;
-		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter, FaceitUserModel faceitUser,LogOnEvent logOn,TestModel test)
+		
+		public RegisterViewModel(IValidateHelper validate,IMapper mapper,ISqlHelper sql,IApiHelper apiHelper,UserModel player,IConverter converter,ISetterHelper setter, FaceitUserModel faceitUser,LogOnEvent logOn)
 		{
 			_validate = validate;
 			_mapper = mapper;
@@ -35,7 +35,7 @@ namespace FaceitFinderUI.ViewModels
 			_setter = setter;
 			_faceitUser = faceitUser;
 			_logOn = logOn;
-			_test = test;
+			
 		}
 
 		
@@ -162,7 +162,7 @@ namespace FaceitFinderUI.ViewModels
 		{
 			try
 			{
-				_test.text = "dladladla";
+				
 				ErrorMessage = "";
 				//naprawienie bugow rejestracji 
 				await IsValid();

@@ -21,12 +21,12 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="OrangeRed" FontSize="70"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Center">
-            <TextBox x:Name="Nick" Width="500"  Height="64" Margin="20 0 0 0" ></TextBox>
+            <TextBox x:Name="Nick" Width="500"  Height="64" Margin="20 0 0 0"  Padding="0 10 0 0" ></TextBox>
             <Button x:Name="Search"  Height="64" Width="64" Margin="30 0 20 0" Background="OrangeRed">
 
 
                 <StackPanel>
-                    <Image Source="../icons/search.png" />
+                    <Image Source="/icons/search.png" />
                     
                 </StackPanel>
             

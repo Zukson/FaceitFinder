@@ -37,6 +37,7 @@ namespace FaceitFinderUI
             IConverter converter = new Converter();
             var config = new MapperConfiguration(cfg =>
             {
+               
                 cfg.CreateMap<FaceitCsgoModel, FaceitUserModel>();
 
                 cfg.CreateMap<UserSqlModel, UserModel>();//.ForMember(x => x.Avatar,opt => opt.MapFrom(src=>new byte[6])); 
@@ -65,8 +66,9 @@ namespace FaceitFinderUI
             _container.Singleton<RegisterEvent>();
             _container.Singleton<UserModel>();
             _container.Singleton<FaceitUserModel>();
-            _container.Singleton<TestModel>();
-              
+            _container.Singleton<SearchEvent>();
+
+
 
             _container.PerRequest<IValidateHelper, ValidateHelper>()
                 .PerRequest<IFaceitApi, FaceitApi>()
@@ -74,6 +76,7 @@ namespace FaceitFinderUI
                 .PerRequest<IConverter, Converter>()
                 .PerRequest<IMapperHelper, MapperHelper>()
                  .PerRequest<ISetterHelper, SetterHelper>();
+                 
              
 
             _container.Singleton<IWindowManager, WindowManager>().

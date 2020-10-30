@@ -131,11 +131,11 @@ namespace FaceitFinderUI.ViewModels
         }   
         public async void Login()
         {
-            ErrorMessage = null;
+            ErrorMessage = "";
             try
             {
                 var sqlUserModel = await _validate.CheckLoginData(Username, Password);
-                _mapperHelper.MapToSingletonUserModel(sqlUserModel,_user);
+                _mapperHelper.MapToSingletonUserModelSql(sqlUserModel,_user);
                 var faceitCsgoModel = await _api.GetStatsByPlayerId(_user.Playerid);
                 _mapperHelper.MapToSingletonFaceitModel(faceitCsgoModel,_faceitUser);
                 _faceitUser = _mapper.Map<FaceitUserModel>(await _api.GetStatsByPlayerId(_user.Playerid));

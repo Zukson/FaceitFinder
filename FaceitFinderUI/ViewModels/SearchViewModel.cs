@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using FaceitFinderUI.Events;
 using FaceitFinderUI.Helpers;
 using FaceitFinderUI.Models;
 using System;
@@ -10,15 +11,20 @@ namespace FaceitFinderUI.ViewModels
 {
    public class SearchViewModel : Screen
     {
-        FaceitUserModel _faceitUser;
+        SearchedFaceitUserModel _searchedFaceitUser;
         IApiHelper _api;
         IMapperHelper _mapperHelper;
-        public SearchViewModel(FaceitUserModel faceitUser,IApiHelper api,IMapperHelper mapperHelper)
+        SearchEvent _searchEvent;
+        SearchedUserModel _user;
+        SearchedUserModel _searchedUser;
+        public SearchViewModel(SearchedFaceitUserModel faceitUser,IApiHelper api,IMapperHelper mapperHelper,SearchEvent searchEvent, SearchedUserModel searchedUser)
         {
 
-            _faceitUser = faceitUser;
+            _searchedFaceitUser = faceitUser;
             _api = api;
             _mapperHelper = mapperHelper;
+            _searchEvent = searchEvent;
+            _searchedUser = searchedUser;
         }
 
 
@@ -47,10 +53,13 @@ namespace FaceitFinderUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var user = await _api.GetPlayerInfo(Nick);
 
                 var faceitUser = await _api.GetUserStats(user.player_id);
-                _mapperHelper.MapToSingletonFaceitModel(faceitUser, _faceitUser);
+                _mapperHelper.MapToSingletonUserModel(user, _user);
+                _mapperHelper.MapToSingletonFaceitModel(faceitUser, _searchedFaceitUser);
+                _searchEvent.OnSearched();
             }
            catch(Exception ex)
             {

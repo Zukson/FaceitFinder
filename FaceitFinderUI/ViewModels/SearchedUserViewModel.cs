@@ -5,32 +5,31 @@ using FaceitFinderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace FaceitFinderUI.ViewModels
 {
-   public class ProfileViewModel : Screen
+  public   class SearchedUserViewModel : Screen
     {
-        FaceitUserModel _faceitUser;
-        UserModel _userModel;
+        SearchedFaceitUserModel _faceitUser;
+        SearchedUserModel _userModel;
         IConverter _converter;
-        LogOnEvent _logOn;
-       
+        SearchEvent _searchEvent;
 
-        public ProfileViewModel(FaceitUserModel faceituser,UserModel userModel,IConverter converter,LogOnEvent logOn)
+
+        public SearchedUserViewModel(FaceitUserModel faceituser, UserModel userModel, IConverter converter, LogOnEvent logOn,SearchEvent searchEvent)
         {
             _faceitUser = faceituser;
             _userModel = userModel;
             _converter = converter;
-            _logOn = logOn;
-            _logOn.LogInEvent += LogOn;
-           
-           
+            _searchEvent = searchEvent;
+            _searchEvent.Searched += Searched;
+
+
         }
 
-        public  async Task  SetUserStatsToProperties()
+        public async Task SetUserStatsToProperties()
         {
             Nick = _userModel.Nickname;
             Avatar = _converter.ConvertBytesToBitmapImage(_userModel.Avatar);
@@ -42,21 +41,23 @@ namespace FaceitFinderUI.ViewModels
             FavoriteMap = _faceitUser.FavoriteMap;
             MapImg = _converter.ConvertBytesToBitmapImage(_converter.GetImgByUrl(_faceitUser.MapImg));
             Hs = _faceitUser.lifetime.AverageHeadshots;
-           
-            
+
+
 
         }
-        private  string _nick;
+        private string _nick;
 
-        public  string Nick
+        public string Nick
         {
-            get { 
+            get
+            {
                 return _nick;
-                }
-            set { 
+            }
+            set
+            {
                 _nick = value;
                 NotifyOfPropertyChange(() => _nick);
-                }
+            }
         }
         private string _matches;
         public string Matches
@@ -68,7 +69,7 @@ namespace FaceitFinderUI.ViewModels
             set
             {
                 _matches = value;
-               NotifyOfPropertyChange(() => Matches);
+                NotifyOfPropertyChange(() => Matches);
             }
         }
         private string _winStreak;
@@ -93,7 +94,7 @@ namespace FaceitFinderUI.ViewModels
             }
             set
             {
-                _winRate  = value;
+                _winRate = value;
                 NotifyOfPropertyChange(() => WinRate);
             }
         }
@@ -106,7 +107,7 @@ namespace FaceitFinderUI.ViewModels
             }
             set
             {
-                _wins= value;
+                _wins = value;
                 NotifyOfPropertyChange(() => Wins);
             }
         }
@@ -125,7 +126,7 @@ namespace FaceitFinderUI.ViewModels
         }
         private string _favoriteMap;
         private string _hs;
-        public string  Hs
+        public string Hs
         {
             get
             {
@@ -151,8 +152,8 @@ namespace FaceitFinderUI.ViewModels
         }
         public BitmapImage _avatar;
 
-       
-      public  BitmapImage Avatar
+
+        public BitmapImage Avatar
         {
             get
             {
@@ -177,14 +178,15 @@ namespace FaceitFinderUI.ViewModels
                 _mapImg = value;
             }
         }
-      public  async void  LogOn()
+        public async void Searched()
         {
-          await   SetUserStatsToProperties();
-           
+            await SetUserStatsToProperties();
+
         }
 
-        
+
 
 
     }
+}
 }

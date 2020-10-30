@@ -9,7 +9,8 @@ namespace FaceitFinderUI.Helpers
     {
         FaceitUserModel MapToFaceitUserModel(FaceitCsgoModel faceitCsgo);
         UserModel MapToUserModel(UserSqlModel sqlModel);
-        void MapToSingletonUserModel(UserSqlModel sqlModel, UserModel singleton);
+        void MapToSingletonUserModel(FaceitPlayerModel sqlModel, UserModel singleton);
         void MapToSingletonFaceitModel(FaceitCsgoModel sqlModel, FaceitUserModel singleton);
+        void MapToSingletonUserModelSql(UserSqlModel model, UserModel singleton);
     }
 }

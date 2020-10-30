@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icons\search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Caliburn.Micro" Version="3.2.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.1" />
@@ -20,14 +24,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="icons\search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Database\FaceitFinderDb.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="icons\Rafiqul-Hassan-Blogger-Search.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="icons\search.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="icons\search-64.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
